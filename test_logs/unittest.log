@@ -1,0 +1,38 @@
+Script started on 2026-05-16 02:42:39+03:00 [COMMAND=".venv/bin/python -m unittest discover -s tests -v" <not executed on terminal>]
+test_async_logger_writes_events (test_local_llm_server.LocalLLMServerTests.test_async_logger_writes_events) ... ok
+test_call_auto_selects_first_model (test_local_llm_server.LocalLLMServerTests.test_call_auto_selects_first_model) ... ok
+test_call_model_override_supports_multiple_loaded_models (test_local_llm_server.LocalLLMServerTests.test_call_model_override_supports_multiple_loaded_models) ... ok
+test_call_repairs_json_then_returns_dict (test_local_llm_server.LocalLLMServerTests.test_call_repairs_json_then_returns_dict) ... ok
+test_call_retries_after_empty_json_then_succeeds (test_local_llm_server.LocalLLMServerTests.test_call_retries_after_empty_json_then_succeeds) ... ok
+test_call_retries_after_loop_then_succeeds (test_local_llm_server.LocalLLMServerTests.test_call_retries_after_loop_then_succeeds) ... ok
+test_call_runs_tool_loop_before_final_answer (test_local_llm_server.LocalLLMServerTests.test_call_runs_tool_loop_before_final_answer) ... ok
+test_get_providers_includes_registry_and_default (test_local_llm_server.LocalLLMServerTests.test_get_providers_includes_registry_and_default) ... ok
+test_json_fix_pipeline_owns_schema_prompt_preparation (test_local_llm_server.LocalLLMServerTests.test_json_fix_pipeline_owns_schema_prompt_preparation) ... ok
+test_json_fix_recovers_simple_invalid_json (test_local_llm_server.LocalLLMServerTests.test_json_fix_recovers_simple_invalid_json) ... ok
+test_json_fix_reports_empty_output (test_local_llm_server.LocalLLMServerTests.test_json_fix_reports_empty_output) ... ok
+test_json_fix_reports_no_json_object (test_local_llm_server.LocalLLMServerTests.test_json_fix_reports_no_json_object) ... ok
+test_list_provider_models_routes_by_provider (test_local_llm_server.LocalLLMServerTests.test_list_provider_models_routes_by_provider) ... ok
+test_llm_batch_accepts_message_lists (test_local_llm_server.LocalLLMServerTests.test_llm_batch_accepts_message_lists) ... ok
+test_llm_batch_accepts_per_item_call_kwargs (test_local_llm_server.LocalLLMServerTests.test_llm_batch_accepts_per_item_call_kwargs) ... ok
+test_llm_batch_can_return_exceptions (test_local_llm_server.LocalLLMServerTests.test_llm_batch_can_return_exceptions) ... ok
+test_llm_batch_limits_concurrency (test_local_llm_server.LocalLLMServerTests.test_llm_batch_limits_concurrency) ... ok
+test_load_model_can_target_different_provider (test_local_llm_server.LocalLLMServerTests.test_load_model_can_target_different_provider) ... ok
+test_load_model_returns_handle_with_defaults (test_local_llm_server.LocalLLMServerTests.test_load_model_returns_handle_with_defaults) ... ok
+test_loop_guard_detects_repetition (test_local_llm_server.LocalLLMServerTests.test_loop_guard_detects_repetition) ... ok
+test_loop_guard_uses_own_retry_budget (test_local_llm_server.LocalLLMServerTests.test_loop_guard_uses_own_retry_budget) ... ok
+test_mock_llm_call_writes_persistent_response_log (test_local_llm_server.LocalLLMServerTests.test_mock_llm_call_writes_persistent_response_log) ... ok
+test_provider_check_uses_endpoint_config (test_local_llm_server.LocalLLMServerTests.test_provider_check_uses_endpoint_config) ... ok
+test_provider_defaults (test_local_llm_server.LocalLLMServerTests.test_provider_defaults) ... ok
+test_provider_registry_loads_named_entries (test_local_llm_server.LocalLLMServerTests.test_provider_registry_loads_named_entries) ... ok
+test_structured_empty_output_exhausts_json_fix_retries (test_local_llm_server.LocalLLMServerTests.test_structured_empty_output_exhausts_json_fix_retries) ... ok
+test_task_pipeline_does_not_own_structured_output (test_local_llm_server.LocalLLMServerTests.test_task_pipeline_does_not_own_structured_output) ... ok
+test_tool_pipeline_executes_registered_tool (test_local_llm_server.LocalLLMServerTests.test_tool_pipeline_executes_registered_tool) ... ok
+test_unstructured_call_does_not_use_json_retry_budget_for_loop_limit (test_local_llm_server.LocalLLMServerTests.test_unstructured_call_does_not_use_json_retry_budget_for_loop_limit) ... ok
+test_unstructured_call_uses_default_loop_retry_budget (test_local_llm_server.LocalLLMServerTests.test_unstructured_call_uses_default_loop_retry_budget) ... ok
+
+----------------------------------------------------------------------
+Ran 30 tests in 0.055s
+
+OK
+
+Script done on 2026-05-16 02:42:39+03:00 [COMMAND_EXIT_CODE="0"]

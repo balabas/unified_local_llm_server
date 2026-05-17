@@ -1,0 +1,25 @@
+providers:
+  ollama:
+    host: 127.0.0.1
+    port: 11434
+    health_path: /api/version
+    models_path: /v1/models
+
+  lm_studio:
+    host: 127.0.0.1
+    port: 1234
+    models_path: /v1/models
+
+  unsloth:
+    host: 127.0.0.1
+    port: 8899
+    api_key: sk-unsloth-ca758f7eb86406391ed6f6395c40f241
+    health_path: /api/health
+    models_path: /v1/models
+
+  llama_cpp:
+    host: 127.0.0.1
+    port: 9090
+    health_path: /health
+    models_path: /v1/models
+

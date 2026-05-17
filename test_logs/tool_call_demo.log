@@ -1,0 +1,266 @@
+
+2026-05-16 19:18:43 [INFO] llm.stream: llm_request #1
+|REQ-MESSAGES| M4F0F52:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "What is the current date and time? Use the tool."
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "gpt-oss:20b",
+|REQ-PRM|  "tools": [
+|REQ-PRM|    "get_current_date_time",
+|REQ-PRM|    "add"
+|REQ-PRM|  ],
+|REQ-PRM|  "options": {
+|REQ-PRM|    "num_predict": 200
+|REQ-PRM|  },
+|REQ-PRM|  "provider": "ollama"
+|REQ-PRM|}
+
+|INFO| [TOOL_RESULT: get_current_date_time]
+|INFO| {
+|INFO|   "name": "get_current_date_time",
+|INFO|   "arguments": {},
+|INFO|   "result": "2026-05-16 19:18:48"
+|INFO| }
+
+2026-05-16 19:18:48 [INFO] llm.stream: llm_request #2
+|REQ-MESSAGES| M4F0F52:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "What is the current date and time? Use the tool."
+|REQ-MESSAGES|}
+|REQ-MESSAGES| M9F32E7:## {
+|REQ-MESSAGES|  "role": "assistant",
+|REQ-MESSAGES|  "content": "",
+|REQ-MESSAGES|  "tool_calls": [
+|REQ-MESSAGES|    {
+|REQ-MESSAGES|      "id": "call_t2z4z0d2",
+|REQ-MESSAGES|      "type": "function",
+|REQ-MESSAGES|      "function": {
+|REQ-MESSAGES|        "name": "get_current_date_time",
+|REQ-MESSAGES|        "arguments": "{}"
+|REQ-MESSAGES|      }
+|REQ-MESSAGES|    }
+|REQ-MESSAGES|  ]
+|REQ-MESSAGES|}
+|REQ-MESSAGES| M0F14CF:## {
+|REQ-MESSAGES|  "role": "tool",
+|REQ-MESSAGES|  "tool_call_id": "call_t2z4z0d2",
+|REQ-MESSAGES|  "name": "get_current_date_time",
+|REQ-MESSAGES|  "content": "2026-05-16 19:18:48"
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "gpt-oss:20b",
+|REQ-PRM|  "tools": [
+|REQ-PRM|    "get_current_date_time",
+|REQ-PRM|    "add"
+|REQ-PRM|  ],
+|REQ-PRM|  "options": {
+|REQ-PRM|    "num_predict": 200
+|REQ-PRM|  },
+|REQ-PRM|  "provider": "ollama"
+|REQ-PRM|}
+
+
+[MESSAGE]
+The current date and time is: **2026-05-16 19:18:48**
+
+2026-05-16 19:18:49 [INFO] llm.stream: llm_response_end #2 (0.7s) [out_tokens=1]
+
+2026-05-16 19:18:49 [INFO] llm.stream: llm_request #3
+|REQ-MESSAGES| M03AAC5:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "What is 1234 + 5678? Use the tool."
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "gpt-oss:20b",
+|REQ-PRM|  "tools": [
+|REQ-PRM|    "get_current_date_time",
+|REQ-PRM|    "add"
+|REQ-PRM|  ],
+|REQ-PRM|  "options": {
+|REQ-PRM|    "num_predict": 200
+|REQ-PRM|  },
+|REQ-PRM|  "provider": "ollama"
+|REQ-PRM|}
+
+|INFO| [TOOL_RESULT: add]
+|INFO| {
+|INFO|   "name": "add",
+|INFO|   "arguments": {
+|INFO|     "a": 1234,
+|INFO|     "b": 5678
+|INFO|   },
+|INFO|   "result": "6912"
+|INFO| }
+
+2026-05-16 19:18:49 [INFO] llm.stream: llm_request #4
+|REQ-MESSAGES| M03AAC5:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "What is 1234 + 5678? Use the tool."
+|REQ-MESSAGES|}
+|REQ-MESSAGES| M9835A2:## {
+|REQ-MESSAGES|  "role": "assistant",
+|REQ-MESSAGES|  "content": "",
+|REQ-MESSAGES|  "tool_calls": [
+|REQ-MESSAGES|    {
+|REQ-MESSAGES|      "id": "call_64cvkhlf",
+|REQ-MESSAGES|      "type": "function",
+|REQ-MESSAGES|      "function": {
+|REQ-MESSAGES|        "name": "add",
+|REQ-MESSAGES|        "arguments": "{\"a\": 1234, \"b\": 5678}"
+|REQ-MESSAGES|      }
+|REQ-MESSAGES|    }
+|REQ-MESSAGES|  ]
+|REQ-MESSAGES|}
+|REQ-MESSAGES| M90CA1C:## {
+|REQ-MESSAGES|  "role": "tool",
+|REQ-MESSAGES|  "tool_call_id": "call_64cvkhlf",
+|REQ-MESSAGES|  "name": "add",
+|REQ-MESSAGES|  "content": "6912"
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "gpt-oss:20b",
+|REQ-PRM|  "tools": [
+|REQ-PRM|    "get_current_date_time",
+|REQ-PRM|    "add"
+|REQ-PRM|  ],
+|REQ-PRM|  "options": {
+|REQ-PRM|    "num_predict": 200
+|REQ-PRM|  },
+|REQ-PRM|  "provider": "ollama"
+|REQ-PRM|}
+
+
+[MESSAGE]
+The sum of 1234 and 5678 is **6912**.
+
+2026-05-16 19:18:50 [INFO] llm.stream: llm_response_end #4 (0.6s) [out_tokens=1]
+
+2026-05-16 19:18:50 [INFO] llm.stream: llm_request #5
+|REQ-MESSAGES| M4F0F52:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "What is the current date and time? Use the tool."
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "google/gemma-4-e4b",
+|REQ-PRM|  "tools": [
+|REQ-PRM|    "get_current_date_time",
+|REQ-PRM|    "add"
+|REQ-PRM|  ],
+|REQ-PRM|  "max_tokens": 200,
+|REQ-PRM|  "provider": "lm_studio"
+|REQ-PRM|}
+
+|INFO| [TOOL_RESULT: get_current_date_time]
+|INFO| {
+|INFO|   "name": "get_current_date_time",
+|INFO|   "arguments": {},
+|INFO|   "result": "2026-05-16 19:18:54"
+|INFO| }
+
+2026-05-16 19:18:54 [INFO] llm.stream: llm_request #6
+|REQ-MESSAGES| M4F0F52:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "What is the current date and time? Use the tool."
+|REQ-MESSAGES|}
+|REQ-MESSAGES| MD51D50:## {
+|REQ-MESSAGES|  "role": "assistant",
+|REQ-MESSAGES|  "content": "",
+|REQ-MESSAGES|  "tool_calls": [
+|REQ-MESSAGES|    {
+|REQ-MESSAGES|      "id": "302287051",
+|REQ-MESSAGES|      "type": "function",
+|REQ-MESSAGES|      "function": {
+|REQ-MESSAGES|        "name": "get_current_date_time",
+|REQ-MESSAGES|        "arguments": "{}"
+|REQ-MESSAGES|      }
+|REQ-MESSAGES|    }
+|REQ-MESSAGES|  ]
+|REQ-MESSAGES|}
+|REQ-MESSAGES| MA0C00C:## {
+|REQ-MESSAGES|  "role": "tool",
+|REQ-MESSAGES|  "tool_call_id": "302287051",
+|REQ-MESSAGES|  "name": "get_current_date_time",
+|REQ-MESSAGES|  "content": "2026-05-16 19:18:54"
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "google/gemma-4-e4b",
+|REQ-PRM|  "tools": [
+|REQ-PRM|    "get_current_date_time",
+|REQ-PRM|    "add"
+|REQ-PRM|  ],
+|REQ-PRM|  "max_tokens": 200,
+|REQ-PRM|  "provider": "lm_studio"
+|REQ-PRM|}
+
+
+[MESSAGE]
+The current date and time is 2026-05-16 19:18:54.
+
+2026-05-16 19:18:54 [INFO] llm.stream: llm_response_end #6 (0.3s) [out_tokens=1]
+
+2026-05-16 19:18:54 [INFO] llm.stream: llm_request #7
+|REQ-MESSAGES| M03AAC5:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "What is 1234 + 5678? Use the tool."
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "google/gemma-4-e4b",
+|REQ-PRM|  "tools": [
+|REQ-PRM|    "get_current_date_time",
+|REQ-PRM|    "add"
+|REQ-PRM|  ],
+|REQ-PRM|  "max_tokens": 200,
+|REQ-PRM|  "provider": "lm_studio"
+|REQ-PRM|}
+
+|INFO| [TOOL_RESULT: add]
+|INFO| {
+|INFO|   "name": "add",
+|INFO|   "arguments": {
+|INFO|     "a": 1234,
+|INFO|     "b": 5678
+|INFO|   },
+|INFO|   "result": "6912"
+|INFO| }
+
+2026-05-16 19:18:56 [INFO] llm.stream: llm_request #8
+|REQ-MESSAGES| M03AAC5:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "What is 1234 + 5678? Use the tool."
+|REQ-MESSAGES|}
+|REQ-MESSAGES| MC00CD5:## {
+|REQ-MESSAGES|  "role": "assistant",
+|REQ-MESSAGES|  "content": "",
+|REQ-MESSAGES|  "tool_calls": [
+|REQ-MESSAGES|    {
+|REQ-MESSAGES|      "id": "130329974",
+|REQ-MESSAGES|      "type": "function",
+|REQ-MESSAGES|      "function": {
+|REQ-MESSAGES|        "name": "add",
+|REQ-MESSAGES|        "arguments": "{\"a\": 1234, \"b\": 5678}"
+|REQ-MESSAGES|      }
+|REQ-MESSAGES|    }
+|REQ-MESSAGES|  ]
+|REQ-MESSAGES|}
+|REQ-MESSAGES| MAEF078:## {
+|REQ-MESSAGES|  "role": "tool",
+|REQ-MESSAGES|  "tool_call_id": "130329974",
+|REQ-MESSAGES|  "name": "add",
+|REQ-MESSAGES|  "content": "6912"
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "google/gemma-4-e4b",
+|REQ-PRM|  "tools": [
+|REQ-PRM|    "get_current_date_time",
+|REQ-PRM|    "add"
+|REQ-PRM|  ],
+|REQ-PRM|  "max_tokens": 200,
+|REQ-PRM|  "provider": "lm_studio"
+|REQ-PRM|}
+
+
+[MESSAGE]
+The result of 1234 + 5678 is 6912.
+
+2026-05-16 19:18:56 [INFO] llm.stream: llm_response_end #8 (0.3s) [out_tokens=1]

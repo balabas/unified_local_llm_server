@@ -1,0 +1,4 @@
+Script started on 2026-05-16 02:42:26+03:00 [COMMAND=".venv/bin/python -c 'import nbformat; from nbformat.validator import validate; path="notebooks/local_llm_demo_cases.ipynb"; nb=nbformat.read(path, as_version=4); validate(nb); print(f"{path} {len(nb.cells)} cells OK")'" <not executed on terminal>]
+notebooks/local_llm_demo_cases.ipynb 41 cells OK
+
+Script done on 2026-05-16 02:42:27+03:00 [COMMAND_EXIT_CODE="0"]

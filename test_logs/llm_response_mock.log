@@ -1,0 +1,44 @@
+
+2026-05-16 19:16:23 [INFO] llm.stream: llm_request #1
+|REQ-MESSAGES| MABCAB6:## {
+|REQ-MESSAGES|  "role": "system",
+|REQ-MESSAGES|  "content": "Return valid JSON matching this schema:
+|REQ-MESSAGES|{
+|REQ-MESSAGES|  \"properties\": {
+|REQ-MESSAGES|    \"name\": {
+|REQ-MESSAGES|      \"title\": \"Name\",
+|REQ-MESSAGES|      \"type\": \"string\"
+|REQ-MESSAGES|    },
+|REQ-MESSAGES|    \"age\": {
+|REQ-MESSAGES|      \"title\": \"Age\",
+|REQ-MESSAGES|      \"type\": \"integer\"
+|REQ-MESSAGES|    }
+|REQ-MESSAGES|  },
+|REQ-MESSAGES|  \"required\": [
+|REQ-MESSAGES|    \"name\",
+|REQ-MESSAGES|    \"age\"
+|REQ-MESSAGES|  ],
+|REQ-MESSAGES|  \"title\": \"DynamicSchema\",
+|REQ-MESSAGES|  \"type\": \"object\"
+|REQ-MESSAGES|}"
+|REQ-MESSAGES|}
+|REQ-MESSAGES| M4ED819:## {
+|REQ-MESSAGES|  "role": "system",
+|REQ-MESSAGES|  "content": "Respond with the final answer only. Do not emit hidden reasoning."
+|REQ-MESSAGES|}
+|REQ-MESSAGES| M715C5A:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "Return a person"
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "small-test-model",
+|REQ-PRM|  "provider": "ollama"
+|REQ-PRM|}
+
+
+[MESSAGE]
+{"name": "Ana", "age": 31}
+|INFO| parsed={"name": "Ana", "age": 31}
+
+
+2026-05-16 19:16:23 [INFO] llm.stream: llm_response_end #1 (0.0s) [out_tokens=1]
