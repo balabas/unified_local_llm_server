@@ -8,7 +8,7 @@ import asyncio
 from pathlib import Path
 
 from unified_local_llm_server.provider_registry import ProviderRegistry
-from unified_local_llm_server.server import LocalLLMServer
+from unified_local_llm_server.server import LLMProviderPool
 
 ROOT = Path(__file__).parent.parent
 REGISTRY_PATH = ROOT / "providers.example.yaml"
@@ -31,7 +31,7 @@ def sep(provider: str, model: str) -> None:
 
 async def run() -> None:
     registry = ProviderRegistry.load(REGISTRY_PATH)
-    server = LocalLLMServer(provider_registry=registry)
+    server = LLMProviderPool(provider_registry=registry)
 
     providers = server.get_providers()
     print(f"Providers: {providers}")
@@ -39,7 +39,7 @@ async def run() -> None:
     # Check which providers are up
     statuses: dict[str, dict] = {}
     for name in providers:
-        statuses[name] = await server.check_provider_by_name(name)
+        statuses[name] = await server.check_provider(name)
         ok = statuses[name]["ok"]
         url = statuses[name]["server_url"]
         print(f"  {name}: {'OK' if ok else 'DOWN'} ({url})")
@@ -52,7 +52,7 @@ async def run() -> None:
             print(f"\n[{provider}] SKIP — not reachable")
             continue
 
-        provider_server = server.provider_server(provider)
+        provider_server = server.get_provider(provider)
 
         # Unload previous provider's model before switching
         if previous_provider and previous_provider != provider:

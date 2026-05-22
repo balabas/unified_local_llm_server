@@ -13,7 +13,7 @@ from unified_local_llm_server.pipelines.loop_guard import LoopGuardPipeline
 from unified_local_llm_server.pipelines.tool import ToolPipeline
 from unified_local_llm_server.provider_registry import ProviderRegistry
 from unified_local_llm_server.providers import ProviderKind, resolve_provider_config
-from unified_local_llm_server.server import LocalLLM, LocalLLMServer
+from unified_local_llm_server.server import LocalLLM, LLMProviderPool
 
 
 class FakeTransport:
@@ -115,7 +115,7 @@ class SlowCountingTransport:
         return {"data": [{"id": "fake-model"}]}
 
 
-class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
+class LLMProviderPoolTests(unittest.IsolatedAsyncioTestCase):
     def test_provider_defaults(self):
         lm = resolve_provider_config(ProviderKind.LM_STUDIO)
         ollama = resolve_provider_config(ProviderKind.OLLAMA)
@@ -205,7 +205,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
         transport = FakeTransport([
             "```json\n{'name': 'Ana', 'age': 31,}\n```",
         ])
-        server = LocalLLMServer(provider=ProviderKind.OLLAMA, transport=transport)
+        server = LLMProviderPool(provider=ProviderKind.OLLAMA, transport=transport)
         llm = server.load_model(model="small-test-model")
         result = await llm.call(
             messages=[{"role": "user", "content": "Return a person"}],
@@ -219,7 +219,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
             ("repeat " * 600).strip(),
             json.dumps({"name": "Ana", "age": 31}),
         ])
-        server = LocalLLMServer(provider=ProviderKind.LM_STUDIO, transport=transport)
+        server = LLMProviderPool(provider=ProviderKind.LM_STUDIO, transport=transport)
         llm = server.load_model(model="small-test-model")
         result = await llm.call(
             messages=[{"role": "user", "content": "Return a person"}],
@@ -235,7 +235,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
             ("repeat " * 600).strip(),
             "ok",
         ])
-        server = LocalLLMServer(provider=ProviderKind.LM_STUDIO, transport=transport)
+        server = LLMProviderPool(provider=ProviderKind.LM_STUDIO, transport=transport)
         llm = server.load_model(model="small-test-model")
         result = await llm.call(
             messages=[{"role": "user", "content": "Return plain text"}],
@@ -249,7 +249,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
             ("repeat " * 600).strip(),
             "ok",
         ])
-        server = LocalLLMServer(provider=ProviderKind.LM_STUDIO, transport=transport)
+        server = LLMProviderPool(provider=ProviderKind.LM_STUDIO, transport=transport)
         llm = server.load_model(model="small-test-model")
         with self.assertRaisesRegex(RuntimeError, "loop detected"):
             await llm.call(
@@ -264,7 +264,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
             ("repeat " * 600).strip(),
             "ok",
         ])
-        server = LocalLLMServer(provider=ProviderKind.LM_STUDIO, transport=transport)
+        server = LLMProviderPool(provider=ProviderKind.LM_STUDIO, transport=transport)
         llm = server.load_model(model="small-test-model")
         result = await llm.call(
             messages=[{"role": "user", "content": "Return plain text"}],
@@ -279,7 +279,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
             "",
             json.dumps({"name": "Ana", "age": 31}),
         ])
-        server = LocalLLMServer(provider=ProviderKind.LM_STUDIO, transport=transport)
+        server = LLMProviderPool(provider=ProviderKind.LM_STUDIO, transport=transport)
         llm = server.load_model(model="small-test-model")
         result = await llm.call(
             messages=[{"role": "user", "content": "Return a person"}],
@@ -292,7 +292,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_structured_empty_output_exhausts_json_fix_retries(self):
         transport = FakeTransport(["", "", "", ""])
-        server = LocalLLMServer(provider=ProviderKind.LM_STUDIO, transport=transport)
+        server = LLMProviderPool(provider=ProviderKind.LM_STUDIO, transport=transport)
         llm = server.load_model(model="small-test-model")
         with self.assertRaisesRegex(ValueError, "JSON fix failed after 4 attempt"):
             await llm.call(
@@ -304,7 +304,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_call_auto_selects_first_model(self):
         transport = FakeTransport(["hello"])
-        server = LocalLLMServer(provider=ProviderKind.LM_STUDIO, transport=transport)
+        server = LLMProviderPool(provider=ProviderKind.LM_STUDIO, transport=transport)
         # no model set — server resolves from /models endpoint
         model = await server.resolve_model()
         llm = server.load_model(model=model)
@@ -316,7 +316,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_call_model_override_supports_multiple_loaded_models(self):
         transport = FakeTransport(["from model b"])
-        server = LocalLLMServer(provider=ProviderKind.LM_STUDIO, transport=transport)
+        server = LLMProviderPool(provider=ProviderKind.LM_STUDIO, transport=transport)
         llm_a = server.load_model(model="model-a")
         llm_b = server.load_model(model="model-b")
         result = await llm_b.call(
@@ -330,7 +330,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
         transport = FakeTransport([
             "from handle",
         ])
-        server = LocalLLMServer(
+        server = LLMProviderPool(
             provider=ProviderKind.OLLAMA,
             transport=transport,
         )
@@ -357,7 +357,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
         transport = FakeTransport([
             "from lm studio",
         ])
-        manager = LocalLLMServer(provider=ProviderKind.OLLAMA)
+        manager = LLMProviderPool(provider=ProviderKind.OLLAMA)
         llm = manager.load_model(
             ProviderKind.LM_STUDIO,
             "model-b",
@@ -376,7 +376,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
             "one",
             "two",
         ])
-        server = LocalLLMServer(provider=ProviderKind.OLLAMA, transport=transport)
+        server = LLMProviderPool(provider=ProviderKind.OLLAMA, transport=transport)
         llm = server.load_model("ollama", "model-a", temperature=0.3)
 
         results = await llm.batch(
@@ -397,7 +397,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
             "first",
             "second",
         ])
-        server = LocalLLMServer(provider=ProviderKind.OLLAMA, transport=transport)
+        server = LLMProviderPool(provider=ProviderKind.OLLAMA, transport=transport)
         llm = server.load_model(
             "ollama",
             "model-a",
@@ -432,7 +432,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_llm_batch_limits_concurrency(self):
         transport = SlowCountingTransport(delay=0.01)
-        server = LocalLLMServer(provider=ProviderKind.OLLAMA, transport=transport)
+        server = LLMProviderPool(provider=ProviderKind.OLLAMA, transport=transport)
         llm = server.load_model("ollama", "model-a")
 
         results = await llm.batch(
@@ -453,7 +453,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
             "not json",
             json.dumps({"name": "Ana", "age": 31}),
         ])
-        server = LocalLLMServer(provider=ProviderKind.OLLAMA, transport=transport)
+        server = LLMProviderPool(provider=ProviderKind.OLLAMA, transport=transport)
         llm = server.load_model("ollama", "model-a")
 
         results = await llm.batch(
@@ -499,7 +499,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_get_providers_includes_registry_and_default(self):
         registry = ProviderRegistry({})
-        server = LocalLLMServer(provider=ProviderKind.OLLAMA, provider_registry=registry)
+        server = LLMProviderPool(provider=ProviderKind.OLLAMA, provider_registry=registry)
         self.assertIn(ProviderKind.OLLAMA, server.get_providers())
         self.assertIn(ProviderKind.LM_STUDIO, server.get_providers())
         self.assertIn(ProviderKind.UNSLOTH, server.get_providers())
@@ -507,7 +507,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
         self.assertNotIn("lmstudio", server.get_providers())
         self.assertNotIn("llama-cpp", server.get_providers())
 
-    async def test_list_provider_models_routes_by_provider(self):
+    async def test_list_loaded_models_routes_by_provider(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "providers.json"
             path.write_text(
@@ -533,20 +533,20 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
                 "/api/ps": ["ollama-a"],
                 "/api/v1/models": ["lmstudio-b"],
             })
-            server = LocalLLMServer(
+            server = LLMProviderPool(
                 provider=ProviderKind.OLLAMA,
                 provider_registry=registry,
                 provider_transport=provider_transport,
                 transport=FakeTransport([]),
             )
-            ollama_models = server.list_provider_models("ollama")
+            ollama_models = server.list_loaded_models("ollama")
             lmstudio_models = server.list_loaded_models("lmstudio")
             self.assertEqual(ollama_models[0], "ollama-a")
             self.assertEqual(lmstudio_models[0], "lmstudio-b")
 
     async def test_provider_check_uses_endpoint_config(self):
         transport = FakeTransport([])
-        server = LocalLLMServer(
+        server = LLMProviderPool(
             provider=ProviderKind.LM_STUDIO,
             transport=transport,
         )
@@ -584,7 +584,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
         transport = FakeTransport([
             json.dumps({"name": "Ana", "age": 31}),
         ])
-        server = LocalLLMServer(
+        server = LLMProviderPool(
             provider=ProviderKind.OLLAMA,
             transport=transport,
         )
@@ -622,7 +622,7 @@ class LocalLLMServerTests(unittest.IsolatedAsyncioTestCase):
         def add(arguments: dict[str, Any]) -> dict[str, int]:
             return {"sum": arguments["a"] + arguments["b"]}
 
-        server = LocalLLMServer(provider=ProviderKind.OLLAMA, transport=transport)
+        server = LLMProviderPool(provider=ProviderKind.OLLAMA, transport=transport)
         llm = server.load_model(model="small-test-model")
         result = await llm.call(
             messages=[{"role": "user", "content": "Add 2 and 3"}],

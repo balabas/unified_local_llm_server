@@ -1,0 +1,213 @@
+provider,model,size_gb,ctx,prompt_tokens,gen_tokens,total_tokens,gen_tps,elapsed_s,vram_delta_mib,nith_pass,error
+llama_cpp,DeepSeek-R1-0528-Qwen3-8B-Q4_K_M,5.03,12000,11761,271,12032,26.7,10.2,6773,True,
+llama_cpp,DeepSeek-R1-0528-Qwen3-8B-Q4_K_M,5.03,32000,31573,300,31873,16.7,18.0,9573,True,
+llama_cpp,DeepSeek-R1-0528-Qwen3-8B-Q4_K_M,5.03,64000,63101,300,63401,7.2,41.9,14153,True,
+llama_cpp,DeepSeek-R1-0528-Qwen3-8B-Q4_K_M,5.03,80000,79613,300,79913,4.9,60.8,16341,True,
+llama_cpp,gemma-4-E4B-it-Q4_K_M,5.34,12000,11272,300,11572,32.4,9.3,4011,True,
+llama_cpp,gemma-4-E4B-it-Q4_K_M,5.34,32000,30691,300,30991,21.4,14.0,4389,True,
+llama_cpp,gemma-4-E4B-it-Q4_K_M,5.34,64000,61815,52,61867,2.4,21.3,4819,True,
+llama_cpp,gemma-4-E4B-it-Q4_K_M,5.34,80000,77170,82,77252,3.0,27.4,5071,True,
+llama_cpp,gpt-oss-20b-MXFP4,12.11,12000,11218,165,11383,20.5,8.0,11977,True,
+llama_cpp,gpt-oss-20b-MXFP4,12.11,32000,30118,187,30305,11.8,15.8,12445,True,
+llama_cpp,gpt-oss-20b-MXFP4,12.11,64000,60501,234,60735,8.2,28.5,13195,True,
+llama_cpp,gpt-oss-20b-MXFP4,12.11,80000,75896,216,76112,6.0,36.2,13573,True,
+llama_cpp,Qwen3.6-27B-UD-Q3_K_XL,14.47,12000,11688,300,11988,9.3,32.4,15297,True,
+llama_cpp,Qwen3.6-27B-UD-Q3_K_XL,14.47,32000,31776,224,32000,5.0,45.1,16545,True,
+llama_cpp,Qwen3.6-27B-UD-Q3_K_XL,14.47,64000,63398,300,63698,3.4,88.8,18545,True,
+llama_cpp,Qwen3.6-27B-UD-Q3_K_XL,14.47,80000,79200,300,79500,2.7,113.0,19551,True,
+llama_cpp,Qwen3.6-27B-UD-Q4_K_XL,17.61,12000,11785,247,12032,6.2,40.1,18289,True,
+llama_cpp,Qwen3.6-27B-UD-Q4_K_XL,17.61,32000,31648,300,31948,6.5,46.0,19537,True,
+llama_cpp,Qwen3.6-27B-UD-Q4_K_XL,17.61,64000,63464,300,63764,3.5,86.6,21537,True,
+llama_cpp,Qwen3.6-27B-UD-Q4_K_XL,17.61,80000,79496,300,79796,2.7,110.8,22545,True,
+llama_cpp,gemma-4-26B-A4B-it-UD-Q4_K_XL,17.09,12000,11271,300,11571,9.7,30.9,18287,True,
+llama_cpp,gemma-4-26B-A4B-it-UD-Q4_K_XL,17.09,32000,30894,300,31194,12.0,25.0,18677,True,
+llama_cpp,gemma-4-26B-A4B-it-UD-Q4_K_XL,17.09,64000,61659,300,61959,7.2,41.6,19301,True,
+llama_cpp,gemma-4-26B-A4B-it-UD-Q4_K_XL,17.09,80000,77192,300,77492,5.8,51.6,19617,True,
+llama_cpp,gemma-4-26B-A4B-it-UD-Q4_K_M,16.87,12000,11293,300,11593,9.7,30.8,18075,True,
+llama_cpp,gemma-4-26B-A4B-it-UD-Q4_K_M,16.87,32000,30676,300,30976,12.1,24.8,18465,True,
+llama_cpp,gemma-4-26B-A4B-it-UD-Q4_K_M,16.87,64000,61611,300,61911,7.2,41.5,19089,True,
+llama_cpp,gemma-4-26B-A4B-it-UD-Q4_K_M,16.87,80000,76968,300,77268,5.8,51.3,19405,True,
+llama_cpp,gemma-4-31B-it-UD-Q4_K_XL,18.77,12000,11377,300,11677,4.5,66.8,22909,True,
+llama_cpp,gemma-4-31B-it-UD-Q4_K_XL,18.77,32000,30668,300,30968,2.0,149.0,23023,True,
+llama_cpp,gemma-4-31B-it-UD-Q4_K_XL,18.77,64000,61807,300,62107,0.5,596.5,22415,True,
+llama_cpp,gemma-4-31B-it-UD-Q4_K_XL,,80000,,,,,,,,timed out
+llama_cpp,gemma-4-E2B-it-UD-Q4_K_XL,,12000,,,,,,,,"HTTP 503: {""detail"":""llama-server is not running — POST /start first""}"
+llama_cpp,gemma-4-E2B-it-UD-Q4_K_XL,,32000,,,,,,,,"HTTP 503: {""detail"":""llama-server is not running — POST /start first""}"
+llama_cpp,gemma-4-E2B-it-UD-Q4_K_XL,,64000,,,,,,,,"HTTP 503: {""detail"":""llama-server is not running — POST /start first""}"
+llama_cpp,gemma-4-E2B-it-UD-Q4_K_XL,,80000,,,,,,,,"HTTP 503: {""detail"":""llama-server is not running — POST /start first""}"
+llama_cpp,gpt-oss-20b-UD-Q4_K_XL,,12000,,,,,,,,"HTTP 503: {""detail"":""llama-server is not running — POST /start first""}"
+llama_cpp,gpt-oss-20b-UD-Q4_K_XL,,32000,,,,,,,,"HTTP 503: {""detail"":""llama-server is not running — POST /start first""}"
+llama_cpp,gpt-oss-20b-UD-Q4_K_XL,,64000,,,,,,,,"HTTP 503: {""detail"":""llama-server is not running — POST /start first""}"
+llama_cpp,gpt-oss-20b-UD-Q4_K_XL,,80000,,,,,,,,"HTTP 503: {""detail"":""llama-server is not running — POST /start first""}"
+lm_studio,90f9618340396838ee7ff5b0ba2da27da62953d3,,12000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'90f9618340396838ee7ff5b0ba2da27da62953d3\': Error: Failed to load model.""\n  }\n}'"
+lm_studio,90f9618340396838ee7ff5b0ba2da27da62953d3,,32000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'90f9618340396838ee7ff5b0ba2da27da62953d3\': Error: Failed to load model.""\n  }\n}'"
+lm_studio,90f9618340396838ee7ff5b0ba2da27da62953d3,,64000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'90f9618340396838ee7ff5b0ba2da27da62953d3\': Error: Failed to load model.""\n  }\n}'"
+lm_studio,90f9618340396838ee7ff5b0ba2da27da62953d3,,80000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'90f9618340396838ee7ff5b0ba2da27da62953d3\': Error: Failed to load model.""\n  }\n}'"
+lm_studio,deepseek/deepseek-r1-0528-qwen3-8b,,12000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'deepseek/deepseek-r1-0528-qwen3-8b\': Error: Failed to load model.""\n  }\n}'"
+lm_studio,deepseek/deepseek-r1-0528-qwen3-8b,,32000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'deepseek/deepseek-r1-0528-qwen3-8b\': Error: Failed to load model.""\n  }\n}'"
+lm_studio,deepseek/deepseek-r1-0528-qwen3-8b,,64000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'deepseek/deepseek-r1-0528-qwen3-8b\': Error: Failed to load model.""\n  }\n}'"
+lm_studio,deepseek/deepseek-r1-0528-qwen3-8b,,80000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'deepseek/deepseek-r1-0528-qwen3-8b\': Error: Failed to load model.""\n  }\n}'"
+lm_studio,google/gemma-4-e4b,,12000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'google/gemma-4-e4b\': Error: Failed to load model.""\n  }\n}'"
+lm_studio,google/gemma-4-e4b,,32000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'google/gemma-4-e4b\': Error: Failed to load model.""\n  }\n}'"
+lm_studio,google/gemma-4-e4b,,64000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'google/gemma-4-e4b\': Error: Failed to load model.""\n  }\n}'"
+lm_studio,google/gemma-4-e4b,,80000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'google/gemma-4-e4b\': Error: Failed to load model.""\n  }\n}'"
+lm_studio,openai/gpt-oss-20b,,12000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'openai/gpt-oss-20b\': Error: Failed to load model.""\n  }\n}'"
+lm_studio,openai/gpt-oss-20b,,32000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'openai/gpt-oss-20b\': Error: Failed to load model.""\n  }\n}'"
+lm_studio,openai/gpt-oss-20b,,64000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'openai/gpt-oss-20b\': Error: Failed to load model.""\n  }\n}'"
+lm_studio,openai/gpt-oss-20b,,80000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'openai/gpt-oss-20b\': Error: Failed to load model.""\n  }\n}'"
+lm_studio,text-embedding-nomic-embed-text-v1.5,,12000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load embedding model \'text-embedding-nomic-embed-text-v1.5\': Error: Error loading model.""\n  }\n}'"
+lm_studio,text-embedding-nomic-embed-text-v1.5,,32000,,,,,,,,"HTTP 400: {
+    ""error"": {
+        ""message"": ""No models loaded. Please load a model in the developer page or use the 'lms load' command."",
+        ""type"": ""invalid_request_error"",
+        ""param"": ""model"",
+        ""code"": null
+    }
+}"
+lm_studio,text-embedding-nomic-embed-text-v1.5,,64000,,,,,,,,"HTTP 400: {
+    ""error"": {
+        ""message"": ""No models loaded. Please load a model in the developer page or use the 'lms load' command."",
+        ""type"": ""invalid_request_error"",
+        ""param"": ""model"",
+        ""code"": null
+    }
+}"
+lm_studio,text-embedding-nomic-embed-text-v1.5,,80000,,,,,,,,"HTTP 400: {
+    ""error"": {
+        ""message"": ""No models loaded. Please load a model in the developer page or use the 'lms load' command."",
+        ""type"": ""invalid_request_error"",
+        ""param"": ""model"",
+        ""code"": null
+    }
+}"
+lm_studio,82d411acf4a06cfb8d9b073a5211bf410bfc29bf@q3_k_xl,,12000,11470,300,11770,6.3,47.4,-6496,True,
+lm_studio,82d411acf4a06cfb8d9b073a5211bf410bfc29bf@q3_k_xl,,32000,31526,300,31826,5.6,53.4,17683,True,
+lm_studio,82d411acf4a06cfb8d9b073a5211bf410bfc29bf@q3_k_xl,,64000,63199,300,63499,3.0,100.1,19683,True,
+lm_studio,82d411acf4a06cfb8d9b073a5211bf410bfc29bf@q3_k_xl,,80000,79624,300,79924,2.3,129.6,20691,True,
+lm_studio,82d411acf4a06cfb8d9b073a5211bf410bfc29bf@q4_k_xl,,12000,11629,300,11929,4.7,63.8,18669,True,
+lm_studio,82d411acf4a06cfb8d9b073a5211bf410bfc29bf@q4_k_xl,,32000,31673,300,31973,3.9,76.9,19907,True,
+lm_studio,82d411acf4a06cfb8d9b073a5211bf410bfc29bf@q4_k_xl,,64000,63332,300,63632,2.2,134.9,22019,True,
+lm_studio,82d411acf4a06cfb8d9b073a5211bf410bfc29bf@q4_k_xl,,80000,79076,300,79376,1.8,167.7,22915,True,
+lm_studio,b68961b3c96e42475123a39fe3f8aa149163cf8b@q4_k_m,,12000,11314,51,11365,1.7,30.8,18841,True,
+lm_studio,b68961b3c96e42475123a39fe3f8aa149163cf8b@q4_k_m,,32000,30817,50,30867,1.9,26.3,19237,True,
+lm_studio,b68961b3c96e42475123a39fe3f8aa149163cf8b@q4_k_m,,64000,62137,50,62187,1.0,49.7,19855,True,
+lm_studio,b68961b3c96e42475123a39fe3f8aa149163cf8b@q4_k_m,,80000,77136,51,77187,0.8,63.1,20171,True,
+lm_studio,b68961b3c96e42475123a39fe3f8aa149163cf8b@q4_k_xl,,12000,11280,48,11328,1.5,31.7,19053,True,
+lm_studio,b68961b3c96e42475123a39fe3f8aa149163cf8b@q4_k_xl,,32000,30623,49,30672,1.8,26.8,19449,True,
+lm_studio,b68961b3c96e42475123a39fe3f8aa149163cf8b@q4_k_xl,,64000,62159,56,62215,1.1,50.5,20067,True,
+lm_studio,b68961b3c96e42475123a39fe3f8aa149163cf8b@q4_k_xl,,80000,77121,50,77171,0.7,71.5,20383,True,
+lm_studio,8bacec5c8e829a25502cdfe3c3f5b6aabee3218c,,12000,11331,58,11389,3.4,17.2,19053,True,
+lm_studio,8bacec5c8e829a25502cdfe3c3f5b6aabee3218c,,32000,30640,51,30691,1.7,30.3,19449,True,
+lm_studio,8bacec5c8e829a25502cdfe3c3f5b6aabee3218c,,64000,61702,52,61754,0.9,56.5,20067,True,
+lm_studio,8bacec5c8e829a25502cdfe3c3f5b6aabee3218c,,80000,77403,51,77454,0.7,72.1,20383,True,
+lm_studio,f0c5915f17ad6c66dbeb577fb06ff8925bf8d7ae,,12000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'f0c5915f17ad6c66dbeb577fb06ff8925bf8d7ae\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,f0c5915f17ad6c66dbeb577fb06ff8925bf8d7ae,,32000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'f0c5915f17ad6c66dbeb577fb06ff8925bf8d7ae\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,f0c5915f17ad6c66dbeb577fb06ff8925bf8d7ae,,64000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'f0c5915f17ad6c66dbeb577fb06ff8925bf8d7ae\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,f0c5915f17ad6c66dbeb577fb06ff8925bf8d7ae,,80000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'f0c5915f17ad6c66dbeb577fb06ff8925bf8d7ae\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,43e80d41a220ac7c83023daacd6a0d1fd8559251@q4_k_xl,,12000,11381,58,11439,0.7,84.2,21971,True,
+lm_studio,43e80d41a220ac7c83023daacd6a0d1fd8559251@q4_k_xl,,32000,30716,62,30778,0.5,126.5,23375,True,
+lm_studio,43e80d41a220ac7c83023daacd6a0d1fd8559251@q4_k_xl,,64000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'43e80d41a220ac7c83023daacd6a0d1fd8559251@q4_k_xl\': Error: Error loading model.""\n  }\n}'"
+lm_studio,43e80d41a220ac7c83023daacd6a0d1fd8559251@q4_k_xl,,80000,0,0,0,0.0,1.0,0,False,
+lm_studio,83df0a889143b1dbfc61b591bbc639540fd9ce4c,,12000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'83df0a889143b1dbfc61b591bbc639540fd9ce4c\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,83df0a889143b1dbfc61b591bbc639540fd9ce4c,,32000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'83df0a889143b1dbfc61b591bbc639540fd9ce4c\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,83df0a889143b1dbfc61b591bbc639540fd9ce4c,,64000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'83df0a889143b1dbfc61b591bbc639540fd9ce4c\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,83df0a889143b1dbfc61b591bbc639540fd9ce4c,,80000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'83df0a889143b1dbfc61b591bbc639540fd9ce4c\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,d449b42d93e1c2c7bda5312f5c25c8fb91dfa9b4@q4_k_xl,,12000,11202,170,11372,8.8,19.4,12011,True,
+lm_studio,d449b42d93e1c2c7bda5312f5c25c8fb91dfa9b4@q4_k_xl,,32000,30274,221,30495,13.2,16.8,12947,True,
+lm_studio,d449b42d93e1c2c7bda5312f5c25c8fb91dfa9b4@q4_k_xl,,64000,60574,300,60874,8.2,36.5,14447,True,
+lm_studio,d449b42d93e1c2c7bda5312f5c25c8fb91dfa9b4@q4_k_xl,,80000,75865,210,76075,4.4,48.0,15223,True,
+lm_studio,f064409f340b34190993560b2168133e5dbae558@q4_k_xl,,12000,11245,74,11319,8.9,8.3,3615,True,
+lm_studio,f064409f340b34190993560b2168133e5dbae558@q4_k_xl,,32000,30647,49,30696,6.2,8.0,3731,True,
+lm_studio,f064409f340b34190993560b2168133e5dbae558@q4_k_xl,,64000,61972,71,62043,4.3,16.4,3919,True,
+lm_studio,f064409f340b34190993560b2168133e5dbae558@q4_k_xl,,80000,77340,72,77412,3.3,21.7,4013,True,
+lm_studio,607a30d783dfa663caf39e06633721c8d4cfcd7e,,12000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'607a30d783dfa663caf39e06633721c8d4cfcd7e\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,607a30d783dfa663caf39e06633721c8d4cfcd7e,,32000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'607a30d783dfa663caf39e06633721c8d4cfcd7e\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,607a30d783dfa663caf39e06633721c8d4cfcd7e,,64000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'607a30d783dfa663caf39e06633721c8d4cfcd7e\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,607a30d783dfa663caf39e06633721c8d4cfcd7e,,80000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'607a30d783dfa663caf39e06633721c8d4cfcd7e\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,86b5e0934494bd15c9632b12f734a8a67f723594,,12000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'86b5e0934494bd15c9632b12f734a8a67f723594\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,86b5e0934494bd15c9632b12f734a8a67f723594,,32000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'86b5e0934494bd15c9632b12f734a8a67f723594\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,86b5e0934494bd15c9632b12f734a8a67f723594,,64000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'86b5e0934494bd15c9632b12f734a8a67f723594\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,86b5e0934494bd15c9632b12f734a8a67f723594,,80000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'86b5e0934494bd15c9632b12f734a8a67f723594\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,808e4613421aad847f44b9383e49201fb8dd1175,,12000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'808e4613421aad847f44b9383e49201fb8dd1175\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,808e4613421aad847f44b9383e49201fb8dd1175,,32000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'808e4613421aad847f44b9383e49201fb8dd1175\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,808e4613421aad847f44b9383e49201fb8dd1175,,64000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'808e4613421aad847f44b9383e49201fb8dd1175\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,808e4613421aad847f44b9383e49201fb8dd1175,,80000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'808e4613421aad847f44b9383e49201fb8dd1175\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,4328cf26390c98c5e3c738b4460a05b95f4911f5,,12000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'4328cf26390c98c5e3c738b4460a05b95f4911f5\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,4328cf26390c98c5e3c738b4460a05b95f4911f5,,32000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'4328cf26390c98c5e3c738b4460a05b95f4911f5\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,4328cf26390c98c5e3c738b4460a05b95f4911f5,,64000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'4328cf26390c98c5e3c738b4460a05b95f4911f5\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,4328cf26390c98c5e3c738b4460a05b95f4911f5,,80000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'4328cf26390c98c5e3c738b4460a05b95f4911f5\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,137da054051ad9f1eac42025f758db4ac9f22535,,12000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'137da054051ad9f1eac42025f758db4ac9f22535\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,137da054051ad9f1eac42025f758db4ac9f22535,,32000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'137da054051ad9f1eac42025f758db4ac9f22535\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,137da054051ad9f1eac42025f758db4ac9f22535,,64000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'137da054051ad9f1eac42025f758db4ac9f22535\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+lm_studio,137da054051ad9f1eac42025f758db4ac9f22535,,80000,,,,,,,,"LM Studio /api/v1/models/load failed (HTTP 500): '{\n  ""error"": {\n    ""type"": ""model_load_failed"",\n    ""message"": ""Failed to load LLM \'137da054051ad9f1eac42025f758db4ac9f22535\': Error: No LM Runtime found for model format \'torchSafetensors\'!""\n  }\n}'"
+ollama,deepseek-r1:8b,,12000,11588,300,11888,31.3,9.6,6867,False,
+ollama,deepseek-r1:8b,,32000,31479,300,31779,16.3,18.4,9781,False,
+ollama,deepseek-r1:8b,,64000,63149,300,63449,7.0,42.9,14315,True,
+ollama,deepseek-r1:8b,,80000,79340,300,79640,5.0,59.8,16667,True,
+ollama,paraphrase-multilingual:latest,,12000,,,,,,,,"HTTP 400: {""error"":""\""paraphrase-multilingual:latest\"" does not support chat""}"
+ollama,paraphrase-multilingual:latest,,32000,,,,,,,,"HTTP 400: {""error"":""\""paraphrase-multilingual:latest\"" does not support chat""}"
+ollama,paraphrase-multilingual:latest,,64000,,,,,,,,"HTTP 400: {""error"":""\""paraphrase-multilingual:latest\"" does not support chat""}"
+ollama,paraphrase-multilingual:latest,,80000,,,,,,,,"HTTP 400: {""error"":""\""paraphrase-multilingual:latest\"" does not support chat""}"
+ollama,nomic-embed-text:latest,,12000,,,,,,,,"HTTP 400: {""error"":""\""nomic-embed-text:latest\"" does not support chat""}"
+ollama,nomic-embed-text:latest,,32000,,,,,,,,"HTTP 400: {""error"":""\""nomic-embed-text:latest\"" does not support chat""}"
+ollama,nomic-embed-text:latest,,64000,,,,,,,,"HTTP 400: {""error"":""\""nomic-embed-text:latest\"" does not support chat""}"
+ollama,nomic-embed-text:latest,,80000,,,,,,,,"HTTP 400: {""error"":""\""nomic-embed-text:latest\"" does not support chat""}"
+ollama,gpt-oss:20b,,12000,11170,260,11430,24.2,10.7,12977,True,
+ollama,gpt-oss:20b,,32000,30193,235,30428,15.9,14.8,13457,True,
+ollama,gpt-oss:20b,,64000,60589,177,60766,6.5,27.3,14293,True,
+ollama,gpt-oss:20b,,80000,75857,232,76089,6.5,35.8,14723,True,
+unsloth,unsloth/Qwen3.6-27B-GGUF@UD-Q4_K_XL,,12000,11591,300,11891,6.8,44.0,18977,True,
+unsloth,unsloth/Qwen3.6-27B-GGUF@UD-Q4_K_XL,,32000,31641,300,31941,6.5,45.9,20225,True,
+unsloth,unsloth/Qwen3.6-27B-GGUF@UD-Q4_K_XL,,64000,63773,227,64000,2.7,84.6,22225,True,
+unsloth,unsloth/Qwen3.6-27B-GGUF@UD-Q4_K_XL,,80000,79127,300,79427,2.7,112.4,23233,True,
+unsloth,unsloth/Qwen3.6-27B-GGUF@UD-Q3_K_XL,,12000,11555,300,11855,7.5,40.2,15985,True,
+unsloth,unsloth/Qwen3.6-27B-GGUF@UD-Q3_K_XL,,32000,31646,300,31946,6.2,48.7,17233,True,
+unsloth,unsloth/Qwen3.6-27B-GGUF@UD-Q3_K_XL,,64000,63614,300,63914,3.3,90.3,19231,True,
+unsloth,unsloth/Qwen3.6-27B-GGUF@UD-Q3_K_XL,,80000,79183,300,79483,2.6,114.3,20241,True,
+unsloth,unsloth/gemma-4-26B-A4B-it-GGUF@UD-Q4_K_XL,,12000,11296,300,11596,8.8,34.2,18963,True,
+unsloth,unsloth/gemma-4-26B-A4B-it-GGUF@UD-Q4_K_XL,,32000,30623,300,30923,12.7,23.5,19359,True,
+unsloth,unsloth/gemma-4-26B-A4B-it-GGUF@UD-Q4_K_XL,,64000,61608,300,61908,7.9,38.1,19983,True,
+unsloth,unsloth/gemma-4-26B-A4B-it-GGUF@UD-Q4_K_XL,,80000,77102,300,77402,6.4,47.2,20299,True,
+unsloth,unsloth/gemma-4-26B-A4B-it-GGUF@UD-Q4_K_M,,12000,11345,300,11645,9.3,32.2,18751,True,
+unsloth,unsloth/gemma-4-26B-A4B-it-GGUF@UD-Q4_K_M,,32000,30558,300,30858,13.0,23.0,19147,True,
+unsloth,unsloth/gemma-4-26B-A4B-it-GGUF@UD-Q4_K_M,,64000,61831,300,62131,7.9,38.2,19771,True,
+unsloth,unsloth/gemma-4-26B-A4B-it-GGUF@UD-Q4_K_M,,80000,76867,300,77167,6.4,47.1,20087,True,
+unsloth,unsloth/gemma-4-31B-it-GGUF@UD-Q4_K_XL,,12000,11384,300,11684,5.9,50.6,22159,True,
+unsloth,unsloth/gemma-4-31B-it-GGUF@UD-Q4_K_XL,,32000,30538,300,30838,5.3,56.6,23781,True,
+unsloth,unsloth/gemma-4-31B-it-GGUF@UD-Q4_K_XL,,64000,0,0,0,0.0,135.6,24063,False,
+unsloth,unsloth/gemma-4-31B-it-GGUF@UD-Q4_K_XL,,80000,,,,,,,,"Unsloth /api/inference/load failed (HTTP 500): '{""detail"":""Failed to load model: [Errno 104] Connection reset by peer""}'"
+unsloth,unsloth/gemma-4-E2B-it-GGUF@UD-Q4_K_XL,,12000,11430,300,11730,25.5,11.8,-19454,True,
+unsloth,unsloth/gemma-4-E2B-it-GGUF@UD-Q4_K_XL,,32000,30539,300,30839,27.6,10.9,3799,True,
+unsloth,unsloth/gemma-4-E2B-it-GGUF@UD-Q4_K_XL,,64000,61702,300,62002,16.0,18.8,4049,True,
+unsloth,unsloth/gemma-4-E2B-it-GGUF@UD-Q4_K_XL,,80000,77337,300,77637,12.5,23.9,4175,True,
+unsloth,unsloth/gpt-oss-20b-GGUF@UD-Q4_K_XL,,12000,11243,181,11424,8.9,20.3,11747,True,
+unsloth,unsloth/gpt-oss-20b-GGUF@UD-Q4_K_XL,,32000,30180,220,30400,14.0,15.7,12215,True,
+unsloth,unsloth/gpt-oss-20b-GGUF@UD-Q4_K_XL,,64000,60580,237,60817,8.3,28.6,12965,True,
+unsloth,unsloth/gpt-oss-20b-GGUF@UD-Q4_K_XL,,80000,75896,232,76128,6.4,36.1,13343,True,
+llama_cpp,gemma-4-31B-it-UD-Q4_K_XL,,80000,,,,,,,,HTTP 500: Internal Server Error
+llama_cpp,gemma-4-E2B-it-UD-Q4_K_XL,,12000,,,,,,,,<urlopen error [Errno 111] Connection refused>
+llama_cpp,gemma-4-E2B-it-UD-Q4_K_XL,,32000,,,,,,,,<urlopen error [Errno 111] Connection refused>
+llama_cpp,gemma-4-E2B-it-UD-Q4_K_XL,,64000,,,,,,,,<urlopen error [Errno 111] Connection refused>
+llama_cpp,gemma-4-E2B-it-UD-Q4_K_XL,,80000,,,,,,,,<urlopen error [Errno 111] Connection refused>
+llama_cpp,gpt-oss-20b-UD-Q4_K_XL,,12000,,,,,,,,<urlopen error [Errno 111] Connection refused>
+llama_cpp,gpt-oss-20b-UD-Q4_K_XL,,32000,,,,,,,,<urlopen error [Errno 111] Connection refused>
+llama_cpp,gpt-oss-20b-UD-Q4_K_XL,,64000,,,,,,,,<urlopen error [Errno 111] Connection refused>
+llama_cpp,gpt-oss-20b-UD-Q4_K_XL,,80000,,,,,,,,<urlopen error [Errno 111] Connection refused>
+ollama,paraphrase-multilingual:latest,,12000,,,,,,,,"HTTP 400: {""error"":""\""paraphrase-multilingual:latest\"" does not support chat""}"
+ollama,paraphrase-multilingual:latest,,32000,,,,,,,,"HTTP 400: {""error"":""\""paraphrase-multilingual:latest\"" does not support chat""}"
+ollama,paraphrase-multilingual:latest,,64000,,,,,,,,"HTTP 400: {""error"":""\""paraphrase-multilingual:latest\"" does not support chat""}"
+ollama,paraphrase-multilingual:latest,,80000,,,,,,,,"HTTP 400: {""error"":""\""paraphrase-multilingual:latest\"" does not support chat""}"
+ollama,nomic-embed-text:latest,,12000,,,,,,,,"HTTP 400: {""error"":""\""nomic-embed-text:latest\"" does not support chat""}"
+ollama,nomic-embed-text:latest,,32000,,,,,,,,"HTTP 400: {""error"":""\""nomic-embed-text:latest\"" does not support chat""}"
+ollama,nomic-embed-text:latest,,64000,,,,,,,,"HTTP 400: {""error"":""\""nomic-embed-text:latest\"" does not support chat""}"
+ollama,nomic-embed-text:latest,,80000,,,,,,,,"HTTP 400: {""error"":""\""nomic-embed-text:latest\"" does not support chat""}"
+unsloth,unsloth/gemma-4-31B-it-GGUF@UD-Q4_K_XL,,80000,,,,,,,,"Unsloth /api/inference/load failed (HTTP 500): '{""detail"":""Failed to load model: llama-server failed to start. Check that the GGUF file is valid and you have enough memory.""}'"
+ollama,paraphrase-multilingual:latest,,12000,,,,,,,,"HTTP 400: {""error"":""\""paraphrase-multilingual:latest\"" does not support chat""}"
+ollama,paraphrase-multilingual:latest,,32000,,,,,,,,"HTTP 400: {""error"":""\""paraphrase-multilingual:latest\"" does not support chat""}"
+ollama,paraphrase-multilingual:latest,,64000,,,,,,,,"HTTP 400: {""error"":""\""paraphrase-multilingual:latest\"" does not support chat""}"
+ollama,paraphrase-multilingual:latest,,80000,,,,,,,,"HTTP 400: {""error"":""\""paraphrase-multilingual:latest\"" does not support chat""}"
+ollama,nomic-embed-text:latest,,12000,,,,,,,,"HTTP 400: {""error"":""\""nomic-embed-text:latest\"" does not support chat""}"
+ollama,nomic-embed-text:latest,,32000,,,,,,,,"HTTP 400: {""error"":""\""nomic-embed-text:latest\"" does not support chat""}"
+ollama,nomic-embed-text:latest,,64000,,,,,,,,"HTTP 400: {""error"":""\""nomic-embed-text:latest\"" does not support chat""}"
+ollama,nomic-embed-text:latest,,80000,,,,,,,,"HTTP 400: {""error"":""\""nomic-embed-text:latest\"" does not support chat""}"
+unsloth,unsloth/gemma-4-31B-it-GGUF@UD-Q4_K_XL,,80000,,,,,,,,"Unsloth /api/inference/load failed (HTTP 500): '{""detail"":""Failed to load model: llama-server failed to start. Check that the GGUF file is valid and you have enough memory.""}'"

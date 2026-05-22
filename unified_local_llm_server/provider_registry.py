@@ -34,6 +34,7 @@ class ProviderRegistryEntry:
     base_path: str | None = None
     health_path: str | None = None
     models_path: str | None = None
+    systemd_service: str | None = None
     def to_provider_config(self) -> ProviderConfig:
         return resolve_provider_config(
             self.provider,
@@ -76,6 +77,7 @@ class ProviderRegistry:
                 base_path=item.get("base_path"),
                 health_path=item.get("health_path"),
                 models_path=item.get("models_path"),
+                systemd_service=item.get("systemd_service"),
             )
         return cls(entries)
 

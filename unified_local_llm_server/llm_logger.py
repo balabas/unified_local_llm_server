@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-import asyncio
 import hashlib
 import json
 import os
+import threading
 import time
 from pathlib import Path
 from typing import Any
@@ -20,8 +20,10 @@ class AsyncLLMLogger:
     def __init__(self, path: str | Path):
         self._path = Path(path)
         self._path.parent.mkdir(parents=True, exist_ok=True)
-        self._lock = asyncio.Lock()
+        self._lock = threading.Lock()
         self._f = open(self._path, "w", encoding="utf-8")
+        self._f.write(f"# log opened {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+        self._f.flush()
         self._call_num = 0
         self._start = 0.0
         self._pending_msg_count = 0
@@ -41,7 +43,7 @@ class AsyncLLMLogger:
         sub_phase: str = "",
         attempt: int | None = None,
     ) -> None:
-        async with self._lock:
+        with self._lock:
             if phase:
                 self._levels = [phase]
             if step:
@@ -77,7 +79,7 @@ class AsyncLLMLogger:
         body["messages"] = messages
         body["provider"] = provider
 
-        async with self._lock:
+        with self._lock:
             self._call_num += 1
             self._start = time.monotonic()
             self._log_end_written = False
@@ -105,7 +107,7 @@ class AsyncLLMLogger:
             for line in prm_json.split("\n"):
                 self._w(f"|REQ-PRM|{line}\n")
             self._w("\n")
-            await asyncio.to_thread(self._f.flush)
+            self._f.flush()
 
     async def log_response(
         self,
@@ -117,7 +119,7 @@ class AsyncLLMLogger:
         error: str | None = None,
         done_reason: str = "",
     ) -> None:
-        async with self._lock:
+        with self._lock:
             self._write_output_chunk(text, is_thinking=False)
             if parsed is not None:
                 parsed_text = json.dumps(parsed, ensure_ascii=False)
@@ -125,19 +127,19 @@ class AsyncLLMLogger:
             if error is not None:
                 self._w(f"\n|INFO| error={error}\n")
             self._write_end(done_reason=done_reason)
-            await asyncio.to_thread(self._f.flush)
+            self._f.flush()
 
     async def log_output_chunk(self, text: str, is_thinking: bool = False) -> None:
-        async with self._lock:
+        with self._lock:
             self._write_output_chunk(text, is_thinking=is_thinking)
-            await asyncio.to_thread(self._f.flush)
+            self._f.flush()
 
     async def log_info(self, text: str) -> None:
-        async with self._lock:
+        with self._lock:
             for line in text.split("\n"):
                 if line:
                     self._w(f"|INFO| {line}\n")
-            await asyncio.to_thread(self._f.flush)
+            self._f.flush()
 
     async def log_event(self, **event: Any) -> None:
         await self.log_info(json.dumps(event, ensure_ascii=False))
@@ -149,13 +151,13 @@ class AsyncLLMLogger:
         completion_tokens: int | None = None,
         done_reason: str = "",
     ) -> None:
-        async with self._lock:
+        with self._lock:
             self._write_end(
                 ollama_prompt_tokens=ollama_prompt_tokens,
                 completion_tokens=completion_tokens,
                 done_reason=done_reason,
             )
-            await asyncio.to_thread(self._f.flush)
+            self._f.flush()
 
     def _context_tag(self) -> str:
         if not self._levels:
@@ -218,5 +220,5 @@ class AsyncLLMLogger:
         self._f.write(text)
 
     async def close(self) -> None:
-        async with self._lock:
-            await asyncio.to_thread(self._f.close)
+        with self._lock:
+            self._f.close()

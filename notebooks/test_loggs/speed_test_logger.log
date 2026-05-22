@@ -1,0 +1,233 @@
+
+2026-05-17 18:26:32 [INFO] llm.stream: llm_request #1
+|REQ-MESSAGES| M4ED819:## {
+|REQ-MESSAGES|  "role": "system",
+|REQ-MESSAGES|  "content": "Respond with the final answer only. Do not emit hidden reasoning."
+|REQ-MESSAGES|}
+|REQ-MESSAGES| M3853E3:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "Write a numbered list of 20 interesting facts about the history of computing. Be concise but informative."
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "DeepSeek-R1-0528-Qwen3-8B-Q4_K_M",
+|REQ-PRM|  "temperature": 0.0,
+|REQ-PRM|  "max_tokens": 100,
+|REQ-PRM|  "provider": "llama_cpp"
+|REQ-PRM|}
+
+
+[MESSAGE]
+
+Okay, the user wants a numbered list of 20 interesting facts about the history of computing. They specifically asked to be concise but informative, so I need to balance brevity with meaningful content. 
+
+Hmm, they're probably looking for something educational but not overly technical—maybe for a presentation, a blog post, or just personal curiosity. The tone should be engaging but factual. 
+
+I should avoid dry academic language and instead make it feel like a journey through time. The user
+
+2026-05-17 18:26:33 [INFO] llm.stream: llm_response_end #1 (0.9s) [out_tokens=1]
+
+2026-05-17 18:26:38 [INFO] llm.stream: llm_request #2
+|REQ-MESSAGES| M4ED819:## {
+|REQ-MESSAGES|  "role": "system",
+|REQ-MESSAGES|  "content": "Respond with the final answer only. Do not emit hidden reasoning."
+|REQ-MESSAGES|}
+|REQ-MESSAGES| M3853E3:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "Write a numbered list of 20 interesting facts about the history of computing. Be concise but informative."
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "DeepSeek-R1-0528-Qwen3-8B-Q4_K_M",
+|REQ-PRM|  "temperature": 0.0,
+|REQ-PRM|  "max_tokens": 100,
+|REQ-PRM|  "provider": "llama_cpp"
+|REQ-PRM|}
+
+
+[MESSAGE]
+
+Okay, the user wants a numbered list of 20 interesting facts about the history of computing. They specifically asked to be concise but informative, so I need to balance brevity with meaningful content. 
+
+Hmm, they're probably looking for something educational but not overly technical—maybe for a presentation, a blog post, or just personal curiosity. The tone should be engaging but factual. 
+
+I should avoid dry academic language and instead make it feel like a journey through time. The user
+
+2026-05-17 18:26:38 [INFO] llm.stream: llm_response_end #2 (0.9s) [out_tokens=1]
+
+2026-05-17 18:26:43 [INFO] llm.stream: llm_request #3
+|REQ-MESSAGES| M4ED819:## {
+|REQ-MESSAGES|  "role": "system",
+|REQ-MESSAGES|  "content": "Respond with the final answer only. Do not emit hidden reasoning."
+|REQ-MESSAGES|}
+|REQ-MESSAGES| M3853E3:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "Write a numbered list of 20 interesting facts about the history of computing. Be concise but informative."
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "DeepSeek-R1-0528-Qwen3-8B-Q4_K_M",
+|REQ-PRM|  "temperature": 0.0,
+|REQ-PRM|  "max_tokens": 100,
+|REQ-PRM|  "provider": "llama_cpp"
+|REQ-PRM|}
+
+
+[MESSAGE]
+
+Okay, the user wants a numbered list of 20 interesting facts about the history of computing. They specifically asked to be concise but informative, so I need to balance brevity with meaningful content. 
+
+Hmm, they're probably looking for something educational but not overly technical—maybe for a presentation, a blog post, or just personal curiosity. The tone should be engaging but factual. 
+
+I should avoid dry academic language and instead make it feel like a journey through time. The user
+
+2026-05-17 18:26:44 [INFO] llm.stream: llm_response_end #3 (0.8s) [out_tokens=1]
+
+2026-05-17 18:26:48 [INFO] llm.stream: llm_request #4
+|REQ-MESSAGES| M4ED819:## {
+|REQ-MESSAGES|  "role": "system",
+|REQ-MESSAGES|  "content": "Respond with the final answer only. Do not emit hidden reasoning."
+|REQ-MESSAGES|}
+|REQ-MESSAGES| M3853E3:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "Write a numbered list of 20 interesting facts about the history of computing. Be concise but informative."
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "DeepSeek-R1-0528-Qwen3-8B-Q4_K_M",
+|REQ-PRM|  "temperature": 0.0,
+|REQ-PRM|  "max_tokens": 100,
+|REQ-PRM|  "provider": "llama_cpp"
+|REQ-PRM|}
+
+
+[MESSAGE]
+
+Okay, the user wants a numbered list of 20 interesting facts about the history of computing. They specifically asked to be concise but informative, so I need to balance brevity with meaningful content. 
+
+Hmm, they're probably looking for something educational but not overly technical—maybe for a presentation, a blog post, or just personal curiosity. The tone should be engaging but factual. 
+
+I should avoid dry academic language and instead make it feel like a journey through time. The user
+
+2026-05-17 18:26:49 [INFO] llm.stream: llm_response_end #4 (0.9s) [out_tokens=1]
+
+2026-05-17 18:26:55 [INFO] llm.stream: llm_request #5
+|REQ-MESSAGES| M4ED819:## {
+|REQ-MESSAGES|  "role": "system",
+|REQ-MESSAGES|  "content": "Respond with the final answer only. Do not emit hidden reasoning."
+|REQ-MESSAGES|}
+|REQ-MESSAGES| M3853E3:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "Write a numbered list of 20 interesting facts about the history of computing. Be concise but informative."
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "gemma-4-E4B-it-Q4_K_M",
+|REQ-PRM|  "temperature": 0.0,
+|REQ-PRM|  "max_tokens": 100,
+|REQ-PRM|  "provider": "llama_cpp"
+|REQ-PRM|}
+
+
+[MESSAGE]
+Here's a thinking process to generate the list of 20 facts:
+
+1.  **Understand the Goal:** Create a numbered list of 20 *interesting*, *concise*, and *informative* facts about the history of computing.
+2.  **Determine Scope/Timeline:** The history must span from pre-electronic calculation aids to modern computing concepts.
+3.  **Categorization Strategy (To ensure breadth):**
+    *   Ancient/Mechanical
+
+2026-05-17 18:26:56 [INFO] llm.stream: llm_response_end #5 (0.9s) [out_tokens=1]
+
+2026-05-17 18:27:02 [INFO] llm.stream: llm_request #6
+|REQ-MESSAGES| M4ED819:## {
+|REQ-MESSAGES|  "role": "system",
+|REQ-MESSAGES|  "content": "Respond with the final answer only. Do not emit hidden reasoning."
+|REQ-MESSAGES|}
+|REQ-MESSAGES| M3853E3:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "Write a numbered list of 20 interesting facts about the history of computing. Be concise but informative."
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "gemma-4-E4B-it-Q4_K_M",
+|REQ-PRM|  "temperature": 0.0,
+|REQ-PRM|  "max_tokens": 100,
+|REQ-PRM|  "provider": "llama_cpp"
+|REQ-PRM|}
+
+
+[MESSAGE]
+Here's a thinking process to generate the list of 20 facts:
+
+1.  **Understand the Goal:** Create a numbered list of 20 *interesting*, *concise*, and *informative* facts about the history of computing.
+2.  **Determine Scope/Timeline:** The history must span from pre-electronic calculation aids to modern computing concepts.
+3.  **Categorization Strategy (To ensure breadth):**
+    *   Ancient/Mechanical
+
+2026-05-17 18:27:03 [INFO] llm.stream: llm_response_end #6 (0.9s) [out_tokens=1]
+
+2026-05-17 18:27:10 [INFO] llm.stream: llm_request #7
+|REQ-MESSAGES| M4ED819:## {
+|REQ-MESSAGES|  "role": "system",
+|REQ-MESSAGES|  "content": "Respond with the final answer only. Do not emit hidden reasoning."
+|REQ-MESSAGES|}
+|REQ-MESSAGES| M3853E3:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "Write a numbered list of 20 interesting facts about the history of computing. Be concise but informative."
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "gemma-4-E4B-it-Q4_K_M",
+|REQ-PRM|  "temperature": 0.0,
+|REQ-PRM|  "max_tokens": 100,
+|REQ-PRM|  "provider": "llama_cpp"
+|REQ-PRM|}
+
+
+[MESSAGE]
+Here's a thinking process to generate the list of 20 facts:
+
+1.  **Understand the Goal:** Create a numbered list of 20 *interesting*, *concise*, and *informative* facts about the history of computing.
+2.  **Determine Scope/Timeline:** The history must span from pre-electronic calculation aids to modern computing concepts.
+3.  **Categorization Strategy (To ensure breadth):**
+    *   Ancient/Mechanical
+
+2026-05-17 18:27:11 [INFO] llm.stream: llm_response_end #7 (0.9s) [out_tokens=1]
+
+2026-05-17 18:27:17 [INFO] llm.stream: llm_request #8
+|REQ-MESSAGES| M4ED819:## {
+|REQ-MESSAGES|  "role": "system",
+|REQ-MESSAGES|  "content": "Respond with the final answer only. Do not emit hidden reasoning."
+|REQ-MESSAGES|}
+|REQ-MESSAGES| M3853E3:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "Write a numbered list of 20 interesting facts about the history of computing. Be concise but informative."
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "gemma-4-E4B-it-Q4_K_M",
+|REQ-PRM|  "temperature": 0.0,
+|REQ-PRM|  "max_tokens": 100,
+|REQ-PRM|  "provider": "llama_cpp"
+|REQ-PRM|}
+
+
+[MESSAGE]
+Here's a thinking process to generate the list of 20 facts:
+
+1.  **Understand the Goal:** Create a numbered list of 20 *interesting*, *concise*, and *informative* facts about the history of computing.
+2.  **Determine Scope/Timeline:** The history must span from pre-electronic calculation aids to modern computing concepts.
+3.  **Categorization Strategy (To ensure breadth):**
+    *   Ancient/Mechanical
+
+2026-05-17 18:27:18 [INFO] llm.stream: llm_response_end #8 (0.9s) [out_tokens=1]
+
+2026-05-17 18:27:24 [INFO] llm.stream: llm_request #9
+|REQ-MESSAGES| M4ED819:## {
+|REQ-MESSAGES|  "role": "system",
+|REQ-MESSAGES|  "content": "Respond with the final answer only. Do not emit hidden reasoning."
+|REQ-MESSAGES|}
+|REQ-MESSAGES| M3853E3:## {
+|REQ-MESSAGES|  "role": "user",
+|REQ-MESSAGES|  "content": "Write a numbered list of 20 interesting facts about the history of computing. Be concise but informative."
+|REQ-MESSAGES|}
+|REQ-PRM|{
+|REQ-PRM|  "model": "gpt-oss-20b-MXFP4",
+|REQ-PRM|  "temperature": 0.0,
+|REQ-PRM|  "max_tokens": 100,
+|REQ-PRM|  "provider": "llama_cpp"
+|REQ-PRM|}
+

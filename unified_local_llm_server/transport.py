@@ -39,11 +39,11 @@ class OpenAICompatibleTransport:
             headers["Authorization"] = f"Bearer {self.api_key}"
         return headers
 
-    def get_json_sync(self, path: str) -> Any:
-        return self._do_request("GET", path, None).json()
+    def get_json_sync(self, path: str, *, timeout: float | None = None) -> Any:
+        return self._do_request("GET", path, None, timeout=timeout).json()
 
-    def post_json_sync(self, path: str, payload: dict[str, Any]) -> HttpResult:
-        return self._do_request("POST", path, payload)
+    def post_json_sync(self, path: str, payload: dict[str, Any], *, timeout: float | None = None) -> HttpResult:
+        return self._do_request("POST", path, payload, timeout=timeout)
 
     async def get_json(self, path: str) -> Any:
         result = await asyncio.to_thread(self._do_request, "GET", path, None)
@@ -52,12 +52,12 @@ class OpenAICompatibleTransport:
     async def post_json(self, path: str, payload: dict[str, Any]) -> HttpResult:
         return await asyncio.to_thread(self._do_request, "POST", path, payload)
 
-    def _do_request(self, method: str, path: str, payload: dict[str, Any] | None) -> HttpResult:
+    def _do_request(self, method: str, path: str, payload: dict[str, Any] | None, *, timeout: float | None = None) -> HttpResult:
         url = f"{self.base_url}/{path.lstrip('/')}"
         data = None if payload is None else json.dumps(payload, ensure_ascii=False).encode("utf-8")
         req = urlrequest.Request(url, data=data, headers=self._headers(), method=method)
         try:
-            with urlrequest.urlopen(req, timeout=self.timeout) as resp:
+            with urlrequest.urlopen(req, timeout=timeout or self.timeout) as resp:
                 raw = resp.read().decode("utf-8")
                 headers = {k: v for k, v in resp.headers.items()}
                 return HttpResult(status=getattr(resp, "status", 200), headers=headers, text=raw)

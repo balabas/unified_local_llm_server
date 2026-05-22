@@ -1,16 +1,19 @@
 providers:
   ollama:
+    systemd_service: ollama.service
     host: 127.0.0.1
     port: 11434
     health_path: /api/version
     models_path: /v1/models
 
   lm_studio:
+    systemd_service: lm_studio_serv.service
     host: 127.0.0.1
     port: 1234
     models_path: /v1/models
 
   unsloth:
+    systemd_service: unsloth_studio.service
     host: 127.0.0.1
     port: 8899
     api_key: sk-unsloth-ca758f7eb86406391ed6f6395c40f241
@@ -18,8 +21,8 @@ providers:
     models_path: /v1/models
 
   llama_cpp:
+    systemd_service: llama_cpp.service
     host: 127.0.0.1
     port: 9090
     health_path: /health
     models_path: /v1/models
-

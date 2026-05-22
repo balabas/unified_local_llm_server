@@ -6,7 +6,7 @@ from dataclasses import dataclass
 
 from unified_local_llm_server.provider_registry import ProviderRegistry, provider_entry_to_server_kwargs
 from unified_local_llm_server.providers import ProviderKind
-from unified_local_llm_server.server import LocalLLMServer
+from unified_local_llm_server.server import LLMProviderPool
 
 
 @dataclass(slots=True)
@@ -26,7 +26,7 @@ CASES = [
 
 async def run_default_cases() -> None:
     for case in CASES:
-        server = LocalLLMServer(provider=case.provider, model=case.model or None)
+        server = LLMProviderPool(provider=case.provider, model=case.model or None)
         try:
             status = await server.check_provider()
             if not status["ok"]:
@@ -51,7 +51,7 @@ async def run_provider_case(
 ) -> None:
     registry = ProviderRegistry.load(registry_path)
     entry = registry.get(provider_name)
-    server = LocalLLMServer(**provider_entry_to_server_kwargs(entry, model=model))
+    server = LLMProviderPool(**provider_entry_to_server_kwargs(entry, model=model))
     status = await server.check_provider()
     print(f"[{provider_name}] {status['server_url']} ready={status['ok']} check={status['kind']}")
     if not status["ok"]:

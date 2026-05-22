@@ -14,7 +14,7 @@ from fastmcp import Client
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from unified_local_llm_server import LocalLLMServer
+from unified_local_llm_server import LLMProviderPool
 
 REGISTRY_PATH = Path(__file__).parent.parent / "providers.example.yaml"
 MCP_SERVER_URL = "http://127.0.0.1:8325/mcp"
@@ -87,13 +87,13 @@ def _get_accessible() -> list[str]:
     global _accessible
     if _accessible is not None:
         return _accessible
-    server = LocalLLMServer(REGISTRY_PATH)
+    server = LLMProviderPool(REGISTRY_PATH)
 
     async def _check() -> list[str]:
         ok = []
         for name in server.provider_registry.names():
             try:
-                if (await server.check_provider_by_name(name)).get("ok"):
+                if (await server.check_provider(name)).get("ok"):
                     ok.append(name)
             except Exception:
                 pass
@@ -114,8 +114,8 @@ def _all_inference_pairs() -> list[tuple[str, str]]:
     return [(p, m) for p, m in pairs if p in _get_accessible()]
 
 
-def _make_server() -> LocalLLMServer:
-    return LocalLLMServer(REGISTRY_PATH)
+def _make_server() -> LLMProviderPool:
+    return LLMProviderPool(REGISTRY_PATH)
 
 # ---------------------------------------------------------------------------
 # Tool-call tests (gpt-oss:20b on ollama, gemma-4-e4b on lm_studio)

@@ -22,17 +22,17 @@ File:
 
 - `unified_local_llm_server/server.py`
 
-`LocalLLMServer.model` is runtime call state. A caller can set it directly, or
+`LLMProviderPool.model` is runtime call state. A caller can set it directly, or
 the server can resolve the first id from the provider's configured models path.
 
-For providers with multiple loaded models, pass `model=` to `LocalLLMServer.call()`.
+For providers with multiple loaded models, pass `model=` to `LLMProviderPool.call()`.
 That selects a model for one call without changing provider config or requiring
 a separate server instance.
 
 Preferred experiment API:
 
 ```python
-server = LocalLLMServer()
+server = LLMProviderPool()
 llm1 = server.load_model("ollama", "llama3.2:3b", temperature=0.2, context_length=8192)
 llm2 = server.load_model("lm_studio", "qwen3-4b", temperature=0.1)
 
@@ -57,7 +57,7 @@ results = await llm1.batch(
 )
 ```
 
-`LocalLLMServer.batch()` is intentionally not the primary API. Mixed-provider
+`LLMProviderPool.batch()` is intentionally not the primary API. Mixed-provider
 batches belong in a separate experiment-runner layer.
 
 ## OpenAI-Compatible Client
@@ -127,7 +127,7 @@ File:
 
 - `unified_local_llm_server/server.py`
 
-`LocalLLMServer.call()` composes the layers in order. It should delegate work to
+`LLMProviderPool.call()` composes the layers in order. It should delegate work to
 the appropriate layer instead of implementing provider config, schema repair,
 or loop detection inline.
 

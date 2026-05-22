@@ -1,0 +1,1936 @@
+[
+  {
+    "provider": "llama_cpp",
+    "model": "DeepSeek-R1-0528-Qwen3-8B-Q4_K_M",
+    "size_gb": 5.03,
+    "ctx": 12000,
+    "prompt_tokens": 11761,
+    "gen_tokens": 271,
+    "total_tokens": 12032,
+    "gen_tps": 26.7,
+    "elapsed_s": 10.2,
+    "vram_delta_mib": 6773,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "DeepSeek-R1-0528-Qwen3-8B-Q4_K_M",
+    "size_gb": 5.03,
+    "ctx": 32000,
+    "prompt_tokens": 31573,
+    "gen_tokens": 300,
+    "total_tokens": 31873,
+    "gen_tps": 16.7,
+    "elapsed_s": 18.0,
+    "vram_delta_mib": 9573,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "DeepSeek-R1-0528-Qwen3-8B-Q4_K_M",
+    "size_gb": 5.03,
+    "ctx": 64000,
+    "prompt_tokens": 63101,
+    "gen_tokens": 300,
+    "total_tokens": 63401,
+    "gen_tps": 7.2,
+    "elapsed_s": 41.9,
+    "vram_delta_mib": 14153,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "DeepSeek-R1-0528-Qwen3-8B-Q4_K_M",
+    "size_gb": 5.03,
+    "ctx": 80000,
+    "prompt_tokens": 79613,
+    "gen_tokens": 300,
+    "total_tokens": 79913,
+    "gen_tps": 4.9,
+    "elapsed_s": 60.8,
+    "vram_delta_mib": 16341,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-E4B-it-Q4_K_M",
+    "size_gb": 5.34,
+    "ctx": 12000,
+    "prompt_tokens": 11272,
+    "gen_tokens": 300,
+    "total_tokens": 11572,
+    "gen_tps": 32.4,
+    "elapsed_s": 9.3,
+    "vram_delta_mib": 4011,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-E4B-it-Q4_K_M",
+    "size_gb": 5.34,
+    "ctx": 32000,
+    "prompt_tokens": 30691,
+    "gen_tokens": 300,
+    "total_tokens": 30991,
+    "gen_tps": 21.4,
+    "elapsed_s": 14.0,
+    "vram_delta_mib": 4389,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-E4B-it-Q4_K_M",
+    "size_gb": 5.34,
+    "ctx": 64000,
+    "prompt_tokens": 61815,
+    "gen_tokens": 52,
+    "total_tokens": 61867,
+    "gen_tps": 2.4,
+    "elapsed_s": 21.3,
+    "vram_delta_mib": 4819,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-E4B-it-Q4_K_M",
+    "size_gb": 5.34,
+    "ctx": 80000,
+    "prompt_tokens": 77170,
+    "gen_tokens": 82,
+    "total_tokens": 77252,
+    "gen_tps": 3.0,
+    "elapsed_s": 27.4,
+    "vram_delta_mib": 5071,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gpt-oss-20b-MXFP4",
+    "size_gb": 12.11,
+    "ctx": 12000,
+    "prompt_tokens": 11218,
+    "gen_tokens": 165,
+    "total_tokens": 11383,
+    "gen_tps": 20.5,
+    "elapsed_s": 8.0,
+    "vram_delta_mib": 11977,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gpt-oss-20b-MXFP4",
+    "size_gb": 12.11,
+    "ctx": 32000,
+    "prompt_tokens": 30118,
+    "gen_tokens": 187,
+    "total_tokens": 30305,
+    "gen_tps": 11.8,
+    "elapsed_s": 15.8,
+    "vram_delta_mib": 12445,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gpt-oss-20b-MXFP4",
+    "size_gb": 12.11,
+    "ctx": 64000,
+    "prompt_tokens": 60501,
+    "gen_tokens": 234,
+    "total_tokens": 60735,
+    "gen_tps": 8.2,
+    "elapsed_s": 28.5,
+    "vram_delta_mib": 13195,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gpt-oss-20b-MXFP4",
+    "size_gb": 12.11,
+    "ctx": 80000,
+    "prompt_tokens": 75896,
+    "gen_tokens": 216,
+    "total_tokens": 76112,
+    "gen_tps": 6.0,
+    "elapsed_s": 36.2,
+    "vram_delta_mib": 13573,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "Qwen3.6-27B-UD-Q3_K_XL",
+    "size_gb": 14.47,
+    "ctx": 12000,
+    "prompt_tokens": 11688,
+    "gen_tokens": 300,
+    "total_tokens": 11988,
+    "gen_tps": 9.3,
+    "elapsed_s": 32.4,
+    "vram_delta_mib": 15297,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "Qwen3.6-27B-UD-Q3_K_XL",
+    "size_gb": 14.47,
+    "ctx": 32000,
+    "prompt_tokens": 31776,
+    "gen_tokens": 224,
+    "total_tokens": 32000,
+    "gen_tps": 5.0,
+    "elapsed_s": 45.1,
+    "vram_delta_mib": 16545,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "Qwen3.6-27B-UD-Q3_K_XL",
+    "size_gb": 14.47,
+    "ctx": 64000,
+    "prompt_tokens": 63398,
+    "gen_tokens": 300,
+    "total_tokens": 63698,
+    "gen_tps": 3.4,
+    "elapsed_s": 88.8,
+    "vram_delta_mib": 18545,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "Qwen3.6-27B-UD-Q3_K_XL",
+    "size_gb": 14.47,
+    "ctx": 80000,
+    "prompt_tokens": 79200,
+    "gen_tokens": 300,
+    "total_tokens": 79500,
+    "gen_tps": 2.7,
+    "elapsed_s": 113.0,
+    "vram_delta_mib": 19551,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "Qwen3.6-27B-UD-Q4_K_XL",
+    "size_gb": 17.61,
+    "ctx": 12000,
+    "prompt_tokens": 11785,
+    "gen_tokens": 247,
+    "total_tokens": 12032,
+    "gen_tps": 6.2,
+    "elapsed_s": 40.1,
+    "vram_delta_mib": 18289,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "Qwen3.6-27B-UD-Q4_K_XL",
+    "size_gb": 17.61,
+    "ctx": 32000,
+    "prompt_tokens": 31648,
+    "gen_tokens": 300,
+    "total_tokens": 31948,
+    "gen_tps": 6.5,
+    "elapsed_s": 46.0,
+    "vram_delta_mib": 19537,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "Qwen3.6-27B-UD-Q4_K_XL",
+    "size_gb": 17.61,
+    "ctx": 64000,
+    "prompt_tokens": 63464,
+    "gen_tokens": 300,
+    "total_tokens": 63764,
+    "gen_tps": 3.5,
+    "elapsed_s": 86.6,
+    "vram_delta_mib": 21537,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "Qwen3.6-27B-UD-Q4_K_XL",
+    "size_gb": 17.61,
+    "ctx": 80000,
+    "prompt_tokens": 79496,
+    "gen_tokens": 300,
+    "total_tokens": 79796,
+    "gen_tps": 2.7,
+    "elapsed_s": 110.8,
+    "vram_delta_mib": 22545,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-26B-A4B-it-UD-Q4_K_XL",
+    "size_gb": 17.09,
+    "ctx": 12000,
+    "prompt_tokens": 11271,
+    "gen_tokens": 300,
+    "total_tokens": 11571,
+    "gen_tps": 9.7,
+    "elapsed_s": 30.9,
+    "vram_delta_mib": 18287,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-26B-A4B-it-UD-Q4_K_XL",
+    "size_gb": 17.09,
+    "ctx": 32000,
+    "prompt_tokens": 30894,
+    "gen_tokens": 300,
+    "total_tokens": 31194,
+    "gen_tps": 12.0,
+    "elapsed_s": 25.0,
+    "vram_delta_mib": 18677,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-26B-A4B-it-UD-Q4_K_XL",
+    "size_gb": 17.09,
+    "ctx": 64000,
+    "prompt_tokens": 61659,
+    "gen_tokens": 300,
+    "total_tokens": 61959,
+    "gen_tps": 7.2,
+    "elapsed_s": 41.6,
+    "vram_delta_mib": 19301,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-26B-A4B-it-UD-Q4_K_XL",
+    "size_gb": 17.09,
+    "ctx": 80000,
+    "prompt_tokens": 77192,
+    "gen_tokens": 300,
+    "total_tokens": 77492,
+    "gen_tps": 5.8,
+    "elapsed_s": 51.6,
+    "vram_delta_mib": 19617,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-26B-A4B-it-UD-Q4_K_M",
+    "size_gb": 16.87,
+    "ctx": 12000,
+    "prompt_tokens": 11293,
+    "gen_tokens": 300,
+    "total_tokens": 11593,
+    "gen_tps": 9.7,
+    "elapsed_s": 30.8,
+    "vram_delta_mib": 18075,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-26B-A4B-it-UD-Q4_K_M",
+    "size_gb": 16.87,
+    "ctx": 32000,
+    "prompt_tokens": 30676,
+    "gen_tokens": 300,
+    "total_tokens": 30976,
+    "gen_tps": 12.1,
+    "elapsed_s": 24.8,
+    "vram_delta_mib": 18465,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-26B-A4B-it-UD-Q4_K_M",
+    "size_gb": 16.87,
+    "ctx": 64000,
+    "prompt_tokens": 61611,
+    "gen_tokens": 300,
+    "total_tokens": 61911,
+    "gen_tps": 7.2,
+    "elapsed_s": 41.5,
+    "vram_delta_mib": 19089,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-26B-A4B-it-UD-Q4_K_M",
+    "size_gb": 16.87,
+    "ctx": 80000,
+    "prompt_tokens": 76968,
+    "gen_tokens": 300,
+    "total_tokens": 77268,
+    "gen_tps": 5.8,
+    "elapsed_s": 51.3,
+    "vram_delta_mib": 19405,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-31B-it-UD-Q4_K_XL",
+    "size_gb": 18.77,
+    "ctx": 12000,
+    "prompt_tokens": 11377,
+    "gen_tokens": 300,
+    "total_tokens": 11677,
+    "gen_tps": 4.5,
+    "elapsed_s": 66.8,
+    "vram_delta_mib": 22909,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-31B-it-UD-Q4_K_XL",
+    "size_gb": 18.77,
+    "ctx": 32000,
+    "prompt_tokens": 30668,
+    "gen_tokens": 300,
+    "total_tokens": 30968,
+    "gen_tps": 2.0,
+    "elapsed_s": 149.0,
+    "vram_delta_mib": 23023,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-31B-it-UD-Q4_K_XL",
+    "size_gb": 18.77,
+    "ctx": 64000,
+    "prompt_tokens": 61807,
+    "gen_tokens": 300,
+    "total_tokens": 62107,
+    "gen_tps": 0.5,
+    "elapsed_s": 596.5,
+    "vram_delta_mib": 22415,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-31B-it-UD-Q4_K_XL",
+    "ctx": 80000,
+    "error": "timed out"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-E2B-it-UD-Q4_K_XL",
+    "ctx": 12000,
+    "error": "HTTP 503: {\"detail\":\"llama-server is not running \u2014 POST /start first\"}"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-E2B-it-UD-Q4_K_XL",
+    "ctx": 32000,
+    "error": "HTTP 503: {\"detail\":\"llama-server is not running \u2014 POST /start first\"}"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-E2B-it-UD-Q4_K_XL",
+    "ctx": 64000,
+    "error": "HTTP 503: {\"detail\":\"llama-server is not running \u2014 POST /start first\"}"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-E2B-it-UD-Q4_K_XL",
+    "ctx": 80000,
+    "error": "HTTP 503: {\"detail\":\"llama-server is not running \u2014 POST /start first\"}"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gpt-oss-20b-UD-Q4_K_XL",
+    "ctx": 12000,
+    "error": "HTTP 503: {\"detail\":\"llama-server is not running \u2014 POST /start first\"}"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gpt-oss-20b-UD-Q4_K_XL",
+    "ctx": 32000,
+    "error": "HTTP 503: {\"detail\":\"llama-server is not running \u2014 POST /start first\"}"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gpt-oss-20b-UD-Q4_K_XL",
+    "ctx": 64000,
+    "error": "HTTP 503: {\"detail\":\"llama-server is not running \u2014 POST /start first\"}"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gpt-oss-20b-UD-Q4_K_XL",
+    "ctx": 80000,
+    "error": "HTTP 503: {\"detail\":\"llama-server is not running \u2014 POST /start first\"}"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "90f9618340396838ee7ff5b0ba2da27da62953d3",
+    "ctx": 12000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'90f9618340396838ee7ff5b0ba2da27da62953d3\\': Error: Failed to load model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "90f9618340396838ee7ff5b0ba2da27da62953d3",
+    "ctx": 32000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'90f9618340396838ee7ff5b0ba2da27da62953d3\\': Error: Failed to load model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "90f9618340396838ee7ff5b0ba2da27da62953d3",
+    "ctx": 64000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'90f9618340396838ee7ff5b0ba2da27da62953d3\\': Error: Failed to load model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "90f9618340396838ee7ff5b0ba2da27da62953d3",
+    "ctx": 80000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'90f9618340396838ee7ff5b0ba2da27da62953d3\\': Error: Failed to load model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "deepseek/deepseek-r1-0528-qwen3-8b",
+    "ctx": 12000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'deepseek/deepseek-r1-0528-qwen3-8b\\': Error: Failed to load model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "deepseek/deepseek-r1-0528-qwen3-8b",
+    "ctx": 32000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'deepseek/deepseek-r1-0528-qwen3-8b\\': Error: Failed to load model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "deepseek/deepseek-r1-0528-qwen3-8b",
+    "ctx": 64000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'deepseek/deepseek-r1-0528-qwen3-8b\\': Error: Failed to load model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "deepseek/deepseek-r1-0528-qwen3-8b",
+    "ctx": 80000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'deepseek/deepseek-r1-0528-qwen3-8b\\': Error: Failed to load model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "google/gemma-4-e4b",
+    "ctx": 12000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'google/gemma-4-e4b\\': Error: Failed to load model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "google/gemma-4-e4b",
+    "ctx": 32000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'google/gemma-4-e4b\\': Error: Failed to load model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "google/gemma-4-e4b",
+    "ctx": 64000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'google/gemma-4-e4b\\': Error: Failed to load model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "google/gemma-4-e4b",
+    "ctx": 80000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'google/gemma-4-e4b\\': Error: Failed to load model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "openai/gpt-oss-20b",
+    "ctx": 12000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'openai/gpt-oss-20b\\': Error: Failed to load model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "openai/gpt-oss-20b",
+    "ctx": 32000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'openai/gpt-oss-20b\\': Error: Failed to load model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "openai/gpt-oss-20b",
+    "ctx": 64000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'openai/gpt-oss-20b\\': Error: Failed to load model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "openai/gpt-oss-20b",
+    "ctx": 80000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'openai/gpt-oss-20b\\': Error: Failed to load model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "text-embedding-nomic-embed-text-v1.5",
+    "ctx": 12000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load embedding model \\'text-embedding-nomic-embed-text-v1.5\\': Error: Error loading model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "text-embedding-nomic-embed-text-v1.5",
+    "ctx": 32000,
+    "error": "HTTP 400: {\n    \"error\": {\n        \"message\": \"No models loaded. Please load a model in the developer page or use the 'lms load' command.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "text-embedding-nomic-embed-text-v1.5",
+    "ctx": 64000,
+    "error": "HTTP 400: {\n    \"error\": {\n        \"message\": \"No models loaded. Please load a model in the developer page or use the 'lms load' command.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "text-embedding-nomic-embed-text-v1.5",
+    "ctx": 80000,
+    "error": "HTTP 400: {\n    \"error\": {\n        \"message\": \"No models loaded. Please load a model in the developer page or use the 'lms load' command.\",\n        \"type\": \"invalid_request_error\",\n        \"param\": \"model\",\n        \"code\": null\n    }\n}"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "82d411acf4a06cfb8d9b073a5211bf410bfc29bf@q3_k_xl",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11470,
+    "gen_tokens": 300,
+    "total_tokens": 11770,
+    "gen_tps": 6.3,
+    "elapsed_s": 47.4,
+    "vram_delta_mib": -6496,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "82d411acf4a06cfb8d9b073a5211bf410bfc29bf@q3_k_xl",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 31526,
+    "gen_tokens": 300,
+    "total_tokens": 31826,
+    "gen_tps": 5.6,
+    "elapsed_s": 53.4,
+    "vram_delta_mib": 17683,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "82d411acf4a06cfb8d9b073a5211bf410bfc29bf@q3_k_xl",
+    "size_gb": null,
+    "ctx": 64000,
+    "prompt_tokens": 63199,
+    "gen_tokens": 300,
+    "total_tokens": 63499,
+    "gen_tps": 3.0,
+    "elapsed_s": 100.1,
+    "vram_delta_mib": 19683,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "82d411acf4a06cfb8d9b073a5211bf410bfc29bf@q3_k_xl",
+    "size_gb": null,
+    "ctx": 80000,
+    "prompt_tokens": 79624,
+    "gen_tokens": 300,
+    "total_tokens": 79924,
+    "gen_tps": 2.3,
+    "elapsed_s": 129.6,
+    "vram_delta_mib": 20691,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "82d411acf4a06cfb8d9b073a5211bf410bfc29bf@q4_k_xl",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11629,
+    "gen_tokens": 300,
+    "total_tokens": 11929,
+    "gen_tps": 4.7,
+    "elapsed_s": 63.8,
+    "vram_delta_mib": 18669,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "82d411acf4a06cfb8d9b073a5211bf410bfc29bf@q4_k_xl",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 31673,
+    "gen_tokens": 300,
+    "total_tokens": 31973,
+    "gen_tps": 3.9,
+    "elapsed_s": 76.9,
+    "vram_delta_mib": 19907,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "82d411acf4a06cfb8d9b073a5211bf410bfc29bf@q4_k_xl",
+    "size_gb": null,
+    "ctx": 64000,
+    "prompt_tokens": 63332,
+    "gen_tokens": 300,
+    "total_tokens": 63632,
+    "gen_tps": 2.2,
+    "elapsed_s": 134.9,
+    "vram_delta_mib": 22019,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "82d411acf4a06cfb8d9b073a5211bf410bfc29bf@q4_k_xl",
+    "size_gb": null,
+    "ctx": 80000,
+    "prompt_tokens": 79076,
+    "gen_tokens": 300,
+    "total_tokens": 79376,
+    "gen_tps": 1.8,
+    "elapsed_s": 167.7,
+    "vram_delta_mib": 22915,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "b68961b3c96e42475123a39fe3f8aa149163cf8b@q4_k_m",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11314,
+    "gen_tokens": 51,
+    "total_tokens": 11365,
+    "gen_tps": 1.7,
+    "elapsed_s": 30.8,
+    "vram_delta_mib": 18841,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "b68961b3c96e42475123a39fe3f8aa149163cf8b@q4_k_m",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 30817,
+    "gen_tokens": 50,
+    "total_tokens": 30867,
+    "gen_tps": 1.9,
+    "elapsed_s": 26.3,
+    "vram_delta_mib": 19237,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "b68961b3c96e42475123a39fe3f8aa149163cf8b@q4_k_m",
+    "size_gb": null,
+    "ctx": 64000,
+    "prompt_tokens": 62137,
+    "gen_tokens": 50,
+    "total_tokens": 62187,
+    "gen_tps": 1.0,
+    "elapsed_s": 49.7,
+    "vram_delta_mib": 19855,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "b68961b3c96e42475123a39fe3f8aa149163cf8b@q4_k_m",
+    "size_gb": null,
+    "ctx": 80000,
+    "prompt_tokens": 77136,
+    "gen_tokens": 51,
+    "total_tokens": 77187,
+    "gen_tps": 0.8,
+    "elapsed_s": 63.1,
+    "vram_delta_mib": 20171,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "b68961b3c96e42475123a39fe3f8aa149163cf8b@q4_k_xl",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11280,
+    "gen_tokens": 48,
+    "total_tokens": 11328,
+    "gen_tps": 1.5,
+    "elapsed_s": 31.7,
+    "vram_delta_mib": 19053,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "b68961b3c96e42475123a39fe3f8aa149163cf8b@q4_k_xl",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 30623,
+    "gen_tokens": 49,
+    "total_tokens": 30672,
+    "gen_tps": 1.8,
+    "elapsed_s": 26.8,
+    "vram_delta_mib": 19449,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "b68961b3c96e42475123a39fe3f8aa149163cf8b@q4_k_xl",
+    "size_gb": null,
+    "ctx": 64000,
+    "prompt_tokens": 62159,
+    "gen_tokens": 56,
+    "total_tokens": 62215,
+    "gen_tps": 1.1,
+    "elapsed_s": 50.5,
+    "vram_delta_mib": 20067,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "b68961b3c96e42475123a39fe3f8aa149163cf8b@q4_k_xl",
+    "size_gb": null,
+    "ctx": 80000,
+    "prompt_tokens": 77121,
+    "gen_tokens": 50,
+    "total_tokens": 77171,
+    "gen_tps": 0.7,
+    "elapsed_s": 71.5,
+    "vram_delta_mib": 20383,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "8bacec5c8e829a25502cdfe3c3f5b6aabee3218c",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11331,
+    "gen_tokens": 58,
+    "total_tokens": 11389,
+    "gen_tps": 3.4,
+    "elapsed_s": 17.2,
+    "vram_delta_mib": 19053,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "8bacec5c8e829a25502cdfe3c3f5b6aabee3218c",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 30640,
+    "gen_tokens": 51,
+    "total_tokens": 30691,
+    "gen_tps": 1.7,
+    "elapsed_s": 30.3,
+    "vram_delta_mib": 19449,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "8bacec5c8e829a25502cdfe3c3f5b6aabee3218c",
+    "size_gb": null,
+    "ctx": 64000,
+    "prompt_tokens": 61702,
+    "gen_tokens": 52,
+    "total_tokens": 61754,
+    "gen_tps": 0.9,
+    "elapsed_s": 56.5,
+    "vram_delta_mib": 20067,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "8bacec5c8e829a25502cdfe3c3f5b6aabee3218c",
+    "size_gb": null,
+    "ctx": 80000,
+    "prompt_tokens": 77403,
+    "gen_tokens": 51,
+    "total_tokens": 77454,
+    "gen_tps": 0.7,
+    "elapsed_s": 72.1,
+    "vram_delta_mib": 20383,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "f0c5915f17ad6c66dbeb577fb06ff8925bf8d7ae",
+    "ctx": 12000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'f0c5915f17ad6c66dbeb577fb06ff8925bf8d7ae\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "f0c5915f17ad6c66dbeb577fb06ff8925bf8d7ae",
+    "ctx": 32000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'f0c5915f17ad6c66dbeb577fb06ff8925bf8d7ae\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "f0c5915f17ad6c66dbeb577fb06ff8925bf8d7ae",
+    "ctx": 64000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'f0c5915f17ad6c66dbeb577fb06ff8925bf8d7ae\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "f0c5915f17ad6c66dbeb577fb06ff8925bf8d7ae",
+    "ctx": 80000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'f0c5915f17ad6c66dbeb577fb06ff8925bf8d7ae\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "43e80d41a220ac7c83023daacd6a0d1fd8559251@q4_k_xl",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11381,
+    "gen_tokens": 58,
+    "total_tokens": 11439,
+    "gen_tps": 0.7,
+    "elapsed_s": 84.2,
+    "vram_delta_mib": 21971,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "43e80d41a220ac7c83023daacd6a0d1fd8559251@q4_k_xl",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 30716,
+    "gen_tokens": 62,
+    "total_tokens": 30778,
+    "gen_tps": 0.5,
+    "elapsed_s": 126.5,
+    "vram_delta_mib": 23375,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "43e80d41a220ac7c83023daacd6a0d1fd8559251@q4_k_xl",
+    "ctx": 64000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'43e80d41a220ac7c83023daacd6a0d1fd8559251@q4_k_xl\\': Error: Error loading model.\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "43e80d41a220ac7c83023daacd6a0d1fd8559251@q4_k_xl",
+    "size_gb": null,
+    "ctx": 80000,
+    "prompt_tokens": 0,
+    "gen_tokens": 0,
+    "total_tokens": 0,
+    "gen_tps": 0.0,
+    "elapsed_s": 1.0,
+    "vram_delta_mib": 0,
+    "nith_pass": false
+  },
+  {
+    "provider": "lm_studio",
+    "model": "83df0a889143b1dbfc61b591bbc639540fd9ce4c",
+    "ctx": 12000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'83df0a889143b1dbfc61b591bbc639540fd9ce4c\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "83df0a889143b1dbfc61b591bbc639540fd9ce4c",
+    "ctx": 32000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'83df0a889143b1dbfc61b591bbc639540fd9ce4c\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "83df0a889143b1dbfc61b591bbc639540fd9ce4c",
+    "ctx": 64000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'83df0a889143b1dbfc61b591bbc639540fd9ce4c\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "83df0a889143b1dbfc61b591bbc639540fd9ce4c",
+    "ctx": 80000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'83df0a889143b1dbfc61b591bbc639540fd9ce4c\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "d449b42d93e1c2c7bda5312f5c25c8fb91dfa9b4@q4_k_xl",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11202,
+    "gen_tokens": 170,
+    "total_tokens": 11372,
+    "gen_tps": 8.8,
+    "elapsed_s": 19.4,
+    "vram_delta_mib": 12011,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "d449b42d93e1c2c7bda5312f5c25c8fb91dfa9b4@q4_k_xl",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 30274,
+    "gen_tokens": 221,
+    "total_tokens": 30495,
+    "gen_tps": 13.2,
+    "elapsed_s": 16.8,
+    "vram_delta_mib": 12947,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "d449b42d93e1c2c7bda5312f5c25c8fb91dfa9b4@q4_k_xl",
+    "size_gb": null,
+    "ctx": 64000,
+    "prompt_tokens": 60574,
+    "gen_tokens": 300,
+    "total_tokens": 60874,
+    "gen_tps": 8.2,
+    "elapsed_s": 36.5,
+    "vram_delta_mib": 14447,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "d449b42d93e1c2c7bda5312f5c25c8fb91dfa9b4@q4_k_xl",
+    "size_gb": null,
+    "ctx": 80000,
+    "prompt_tokens": 75865,
+    "gen_tokens": 210,
+    "total_tokens": 76075,
+    "gen_tps": 4.4,
+    "elapsed_s": 48.0,
+    "vram_delta_mib": 15223,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "f064409f340b34190993560b2168133e5dbae558@q4_k_xl",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11245,
+    "gen_tokens": 74,
+    "total_tokens": 11319,
+    "gen_tps": 8.9,
+    "elapsed_s": 8.3,
+    "vram_delta_mib": 3615,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "f064409f340b34190993560b2168133e5dbae558@q4_k_xl",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 30647,
+    "gen_tokens": 49,
+    "total_tokens": 30696,
+    "gen_tps": 6.2,
+    "elapsed_s": 8.0,
+    "vram_delta_mib": 3731,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "f064409f340b34190993560b2168133e5dbae558@q4_k_xl",
+    "size_gb": null,
+    "ctx": 64000,
+    "prompt_tokens": 61972,
+    "gen_tokens": 71,
+    "total_tokens": 62043,
+    "gen_tps": 4.3,
+    "elapsed_s": 16.4,
+    "vram_delta_mib": 3919,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "f064409f340b34190993560b2168133e5dbae558@q4_k_xl",
+    "size_gb": null,
+    "ctx": 80000,
+    "prompt_tokens": 77340,
+    "gen_tokens": 72,
+    "total_tokens": 77412,
+    "gen_tps": 3.3,
+    "elapsed_s": 21.7,
+    "vram_delta_mib": 4013,
+    "nith_pass": true
+  },
+  {
+    "provider": "lm_studio",
+    "model": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "ctx": 12000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'607a30d783dfa663caf39e06633721c8d4cfcd7e\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "ctx": 32000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'607a30d783dfa663caf39e06633721c8d4cfcd7e\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "ctx": 64000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'607a30d783dfa663caf39e06633721c8d4cfcd7e\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+    "ctx": 80000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'607a30d783dfa663caf39e06633721c8d4cfcd7e\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "86b5e0934494bd15c9632b12f734a8a67f723594",
+    "ctx": 12000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'86b5e0934494bd15c9632b12f734a8a67f723594\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "86b5e0934494bd15c9632b12f734a8a67f723594",
+    "ctx": 32000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'86b5e0934494bd15c9632b12f734a8a67f723594\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "86b5e0934494bd15c9632b12f734a8a67f723594",
+    "ctx": 64000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'86b5e0934494bd15c9632b12f734a8a67f723594\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "86b5e0934494bd15c9632b12f734a8a67f723594",
+    "ctx": 80000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'86b5e0934494bd15c9632b12f734a8a67f723594\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "808e4613421aad847f44b9383e49201fb8dd1175",
+    "ctx": 12000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'808e4613421aad847f44b9383e49201fb8dd1175\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "808e4613421aad847f44b9383e49201fb8dd1175",
+    "ctx": 32000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'808e4613421aad847f44b9383e49201fb8dd1175\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "808e4613421aad847f44b9383e49201fb8dd1175",
+    "ctx": 64000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'808e4613421aad847f44b9383e49201fb8dd1175\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "808e4613421aad847f44b9383e49201fb8dd1175",
+    "ctx": 80000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'808e4613421aad847f44b9383e49201fb8dd1175\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "4328cf26390c98c5e3c738b4460a05b95f4911f5",
+    "ctx": 12000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'4328cf26390c98c5e3c738b4460a05b95f4911f5\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "4328cf26390c98c5e3c738b4460a05b95f4911f5",
+    "ctx": 32000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'4328cf26390c98c5e3c738b4460a05b95f4911f5\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "4328cf26390c98c5e3c738b4460a05b95f4911f5",
+    "ctx": 64000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'4328cf26390c98c5e3c738b4460a05b95f4911f5\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "4328cf26390c98c5e3c738b4460a05b95f4911f5",
+    "ctx": 80000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'4328cf26390c98c5e3c738b4460a05b95f4911f5\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "137da054051ad9f1eac42025f758db4ac9f22535",
+    "ctx": 12000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'137da054051ad9f1eac42025f758db4ac9f22535\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "137da054051ad9f1eac42025f758db4ac9f22535",
+    "ctx": 32000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'137da054051ad9f1eac42025f758db4ac9f22535\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "137da054051ad9f1eac42025f758db4ac9f22535",
+    "ctx": 64000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'137da054051ad9f1eac42025f758db4ac9f22535\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "lm_studio",
+    "model": "137da054051ad9f1eac42025f758db4ac9f22535",
+    "ctx": 80000,
+    "error": "LM Studio /api/v1/models/load failed (HTTP 500): '{\\n  \"error\": {\\n    \"type\": \"model_load_failed\",\\n    \"message\": \"Failed to load LLM \\'137da054051ad9f1eac42025f758db4ac9f22535\\': Error: No LM Runtime found for model format \\'torchSafetensors\\'!\"\\n  }\\n}'"
+  },
+  {
+    "provider": "ollama",
+    "model": "deepseek-r1:8b",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11588,
+    "gen_tokens": 300,
+    "total_tokens": 11888,
+    "gen_tps": 31.3,
+    "elapsed_s": 9.6,
+    "vram_delta_mib": 6867,
+    "nith_pass": false
+  },
+  {
+    "provider": "ollama",
+    "model": "deepseek-r1:8b",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 31479,
+    "gen_tokens": 300,
+    "total_tokens": 31779,
+    "gen_tps": 16.3,
+    "elapsed_s": 18.4,
+    "vram_delta_mib": 9781,
+    "nith_pass": false
+  },
+  {
+    "provider": "ollama",
+    "model": "deepseek-r1:8b",
+    "size_gb": null,
+    "ctx": 64000,
+    "prompt_tokens": 63149,
+    "gen_tokens": 300,
+    "total_tokens": 63449,
+    "gen_tps": 7.0,
+    "elapsed_s": 42.9,
+    "vram_delta_mib": 14315,
+    "nith_pass": true
+  },
+  {
+    "provider": "ollama",
+    "model": "deepseek-r1:8b",
+    "size_gb": null,
+    "ctx": 80000,
+    "prompt_tokens": 79340,
+    "gen_tokens": 300,
+    "total_tokens": 79640,
+    "gen_tps": 5.0,
+    "elapsed_s": 59.8,
+    "vram_delta_mib": 16667,
+    "nith_pass": true
+  },
+  {
+    "provider": "ollama",
+    "model": "paraphrase-multilingual:latest",
+    "ctx": 12000,
+    "error": "HTTP 400: {\"error\":\"\\\"paraphrase-multilingual:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "paraphrase-multilingual:latest",
+    "ctx": 32000,
+    "error": "HTTP 400: {\"error\":\"\\\"paraphrase-multilingual:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "paraphrase-multilingual:latest",
+    "ctx": 64000,
+    "error": "HTTP 400: {\"error\":\"\\\"paraphrase-multilingual:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "paraphrase-multilingual:latest",
+    "ctx": 80000,
+    "error": "HTTP 400: {\"error\":\"\\\"paraphrase-multilingual:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "nomic-embed-text:latest",
+    "ctx": 12000,
+    "error": "HTTP 400: {\"error\":\"\\\"nomic-embed-text:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "nomic-embed-text:latest",
+    "ctx": 32000,
+    "error": "HTTP 400: {\"error\":\"\\\"nomic-embed-text:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "nomic-embed-text:latest",
+    "ctx": 64000,
+    "error": "HTTP 400: {\"error\":\"\\\"nomic-embed-text:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "nomic-embed-text:latest",
+    "ctx": 80000,
+    "error": "HTTP 400: {\"error\":\"\\\"nomic-embed-text:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "gpt-oss:20b",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11170,
+    "gen_tokens": 260,
+    "total_tokens": 11430,
+    "gen_tps": 24.2,
+    "elapsed_s": 10.7,
+    "vram_delta_mib": 12977,
+    "nith_pass": true
+  },
+  {
+    "provider": "ollama",
+    "model": "gpt-oss:20b",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 30193,
+    "gen_tokens": 235,
+    "total_tokens": 30428,
+    "gen_tps": 15.9,
+    "elapsed_s": 14.8,
+    "vram_delta_mib": 13457,
+    "nith_pass": true
+  },
+  {
+    "provider": "ollama",
+    "model": "gpt-oss:20b",
+    "size_gb": null,
+    "ctx": 64000,
+    "prompt_tokens": 60589,
+    "gen_tokens": 177,
+    "total_tokens": 60766,
+    "gen_tps": 6.5,
+    "elapsed_s": 27.3,
+    "vram_delta_mib": 14293,
+    "nith_pass": true
+  },
+  {
+    "provider": "ollama",
+    "model": "gpt-oss:20b",
+    "size_gb": null,
+    "ctx": 80000,
+    "prompt_tokens": 75857,
+    "gen_tokens": 232,
+    "total_tokens": 76089,
+    "gen_tps": 6.5,
+    "elapsed_s": 35.8,
+    "vram_delta_mib": 14723,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/Qwen3.6-27B-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11591,
+    "gen_tokens": 300,
+    "total_tokens": 11891,
+    "gen_tps": 6.8,
+    "elapsed_s": 44.0,
+    "vram_delta_mib": 18977,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/Qwen3.6-27B-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 31641,
+    "gen_tokens": 300,
+    "total_tokens": 31941,
+    "gen_tps": 6.5,
+    "elapsed_s": 45.9,
+    "vram_delta_mib": 20225,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/Qwen3.6-27B-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 64000,
+    "prompt_tokens": 63773,
+    "gen_tokens": 227,
+    "total_tokens": 64000,
+    "gen_tps": 2.7,
+    "elapsed_s": 84.6,
+    "vram_delta_mib": 22225,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/Qwen3.6-27B-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 80000,
+    "prompt_tokens": 79127,
+    "gen_tokens": 300,
+    "total_tokens": 79427,
+    "gen_tps": 2.7,
+    "elapsed_s": 112.4,
+    "vram_delta_mib": 23233,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/Qwen3.6-27B-GGUF@UD-Q3_K_XL",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11555,
+    "gen_tokens": 300,
+    "total_tokens": 11855,
+    "gen_tps": 7.5,
+    "elapsed_s": 40.2,
+    "vram_delta_mib": 15985,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/Qwen3.6-27B-GGUF@UD-Q3_K_XL",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 31646,
+    "gen_tokens": 300,
+    "total_tokens": 31946,
+    "gen_tps": 6.2,
+    "elapsed_s": 48.7,
+    "vram_delta_mib": 17233,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/Qwen3.6-27B-GGUF@UD-Q3_K_XL",
+    "size_gb": null,
+    "ctx": 64000,
+    "prompt_tokens": 63614,
+    "gen_tokens": 300,
+    "total_tokens": 63914,
+    "gen_tps": 3.3,
+    "elapsed_s": 90.3,
+    "vram_delta_mib": 19231,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/Qwen3.6-27B-GGUF@UD-Q3_K_XL",
+    "size_gb": null,
+    "ctx": 80000,
+    "prompt_tokens": 79183,
+    "gen_tokens": 300,
+    "total_tokens": 79483,
+    "gen_tps": 2.6,
+    "elapsed_s": 114.3,
+    "vram_delta_mib": 20241,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-26B-A4B-it-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11296,
+    "gen_tokens": 300,
+    "total_tokens": 11596,
+    "gen_tps": 8.8,
+    "elapsed_s": 34.2,
+    "vram_delta_mib": 18963,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-26B-A4B-it-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 30623,
+    "gen_tokens": 300,
+    "total_tokens": 30923,
+    "gen_tps": 12.7,
+    "elapsed_s": 23.5,
+    "vram_delta_mib": 19359,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-26B-A4B-it-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 64000,
+    "prompt_tokens": 61608,
+    "gen_tokens": 300,
+    "total_tokens": 61908,
+    "gen_tps": 7.9,
+    "elapsed_s": 38.1,
+    "vram_delta_mib": 19983,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-26B-A4B-it-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 80000,
+    "prompt_tokens": 77102,
+    "gen_tokens": 300,
+    "total_tokens": 77402,
+    "gen_tps": 6.4,
+    "elapsed_s": 47.2,
+    "vram_delta_mib": 20299,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-26B-A4B-it-GGUF@UD-Q4_K_M",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11345,
+    "gen_tokens": 300,
+    "total_tokens": 11645,
+    "gen_tps": 9.3,
+    "elapsed_s": 32.2,
+    "vram_delta_mib": 18751,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-26B-A4B-it-GGUF@UD-Q4_K_M",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 30558,
+    "gen_tokens": 300,
+    "total_tokens": 30858,
+    "gen_tps": 13.0,
+    "elapsed_s": 23.0,
+    "vram_delta_mib": 19147,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-26B-A4B-it-GGUF@UD-Q4_K_M",
+    "size_gb": null,
+    "ctx": 64000,
+    "prompt_tokens": 61831,
+    "gen_tokens": 300,
+    "total_tokens": 62131,
+    "gen_tps": 7.9,
+    "elapsed_s": 38.2,
+    "vram_delta_mib": 19771,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-26B-A4B-it-GGUF@UD-Q4_K_M",
+    "size_gb": null,
+    "ctx": 80000,
+    "prompt_tokens": 76867,
+    "gen_tokens": 300,
+    "total_tokens": 77167,
+    "gen_tps": 6.4,
+    "elapsed_s": 47.1,
+    "vram_delta_mib": 20087,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-31B-it-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11384,
+    "gen_tokens": 300,
+    "total_tokens": 11684,
+    "gen_tps": 5.9,
+    "elapsed_s": 50.6,
+    "vram_delta_mib": 22159,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-31B-it-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 30538,
+    "gen_tokens": 300,
+    "total_tokens": 30838,
+    "gen_tps": 5.3,
+    "elapsed_s": 56.6,
+    "vram_delta_mib": 23781,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-31B-it-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 64000,
+    "prompt_tokens": 0,
+    "gen_tokens": 0,
+    "total_tokens": 0,
+    "gen_tps": 0.0,
+    "elapsed_s": 135.6,
+    "vram_delta_mib": 24063,
+    "nith_pass": false
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-31B-it-GGUF@UD-Q4_K_XL",
+    "ctx": 80000,
+    "error": "Unsloth /api/inference/load failed (HTTP 500): '{\"detail\":\"Failed to load model: [Errno 104] Connection reset by peer\"}'"
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-E2B-it-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11430,
+    "gen_tokens": 300,
+    "total_tokens": 11730,
+    "gen_tps": 25.5,
+    "elapsed_s": 11.8,
+    "vram_delta_mib": -19454,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-E2B-it-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 30539,
+    "gen_tokens": 300,
+    "total_tokens": 30839,
+    "gen_tps": 27.6,
+    "elapsed_s": 10.9,
+    "vram_delta_mib": 3799,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-E2B-it-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 64000,
+    "prompt_tokens": 61702,
+    "gen_tokens": 300,
+    "total_tokens": 62002,
+    "gen_tps": 16.0,
+    "elapsed_s": 18.8,
+    "vram_delta_mib": 4049,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-E2B-it-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 80000,
+    "prompt_tokens": 77337,
+    "gen_tokens": 300,
+    "total_tokens": 77637,
+    "gen_tps": 12.5,
+    "elapsed_s": 23.9,
+    "vram_delta_mib": 4175,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gpt-oss-20b-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11243,
+    "gen_tokens": 181,
+    "total_tokens": 11424,
+    "gen_tps": 8.9,
+    "elapsed_s": 20.3,
+    "vram_delta_mib": 11747,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gpt-oss-20b-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 30180,
+    "gen_tokens": 220,
+    "total_tokens": 30400,
+    "gen_tps": 14.0,
+    "elapsed_s": 15.7,
+    "vram_delta_mib": 12215,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gpt-oss-20b-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 64000,
+    "prompt_tokens": 60580,
+    "gen_tokens": 237,
+    "total_tokens": 60817,
+    "gen_tps": 8.3,
+    "elapsed_s": 28.6,
+    "vram_delta_mib": 12965,
+    "nith_pass": true
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gpt-oss-20b-GGUF@UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 80000,
+    "prompt_tokens": 75896,
+    "gen_tokens": 232,
+    "total_tokens": 76128,
+    "gen_tps": 6.4,
+    "elapsed_s": 36.1,
+    "vram_delta_mib": 13343,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-31B-it-UD-Q4_K_XL",
+    "ctx": 80000,
+    "error": "HTTP 500: Internal Server Error"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-E2B-it-UD-Q4_K_XL",
+    "ctx": 12000,
+    "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-E2B-it-UD-Q4_K_XL",
+    "ctx": 32000,
+    "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-E2B-it-UD-Q4_K_XL",
+    "ctx": 64000,
+    "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-E2B-it-UD-Q4_K_XL",
+    "ctx": 80000,
+    "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gpt-oss-20b-UD-Q4_K_XL",
+    "ctx": 12000,
+    "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gpt-oss-20b-UD-Q4_K_XL",
+    "ctx": 32000,
+    "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gpt-oss-20b-UD-Q4_K_XL",
+    "ctx": 64000,
+    "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gpt-oss-20b-UD-Q4_K_XL",
+    "ctx": 80000,
+    "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  {
+    "provider": "ollama",
+    "model": "paraphrase-multilingual:latest",
+    "ctx": 12000,
+    "error": "HTTP 400: {\"error\":\"\\\"paraphrase-multilingual:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "paraphrase-multilingual:latest",
+    "ctx": 32000,
+    "error": "HTTP 400: {\"error\":\"\\\"paraphrase-multilingual:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "paraphrase-multilingual:latest",
+    "ctx": 64000,
+    "error": "HTTP 400: {\"error\":\"\\\"paraphrase-multilingual:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "paraphrase-multilingual:latest",
+    "ctx": 80000,
+    "error": "HTTP 400: {\"error\":\"\\\"paraphrase-multilingual:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "nomic-embed-text:latest",
+    "ctx": 12000,
+    "error": "HTTP 400: {\"error\":\"\\\"nomic-embed-text:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "nomic-embed-text:latest",
+    "ctx": 32000,
+    "error": "HTTP 400: {\"error\":\"\\\"nomic-embed-text:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "nomic-embed-text:latest",
+    "ctx": 64000,
+    "error": "HTTP 400: {\"error\":\"\\\"nomic-embed-text:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "nomic-embed-text:latest",
+    "ctx": 80000,
+    "error": "HTTP 400: {\"error\":\"\\\"nomic-embed-text:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-31B-it-GGUF@UD-Q4_K_XL",
+    "ctx": 80000,
+    "error": "Unsloth /api/inference/load failed (HTTP 500): '{\"detail\":\"Failed to load model: llama-server failed to start. Check that the GGUF file is valid and you have enough memory.\"}'"
+  },
+  {
+    "provider": "ollama",
+    "model": "paraphrase-multilingual:latest",
+    "ctx": 12000,
+    "error": "HTTP 400: {\"error\":\"\\\"paraphrase-multilingual:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "paraphrase-multilingual:latest",
+    "ctx": 32000,
+    "error": "HTTP 400: {\"error\":\"\\\"paraphrase-multilingual:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "paraphrase-multilingual:latest",
+    "ctx": 64000,
+    "error": "HTTP 400: {\"error\":\"\\\"paraphrase-multilingual:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "paraphrase-multilingual:latest",
+    "ctx": 80000,
+    "error": "HTTP 400: {\"error\":\"\\\"paraphrase-multilingual:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "nomic-embed-text:latest",
+    "ctx": 12000,
+    "error": "HTTP 400: {\"error\":\"\\\"nomic-embed-text:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "nomic-embed-text:latest",
+    "ctx": 32000,
+    "error": "HTTP 400: {\"error\":\"\\\"nomic-embed-text:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "nomic-embed-text:latest",
+    "ctx": 64000,
+    "error": "HTTP 400: {\"error\":\"\\\"nomic-embed-text:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "ollama",
+    "model": "nomic-embed-text:latest",
+    "ctx": 80000,
+    "error": "HTTP 400: {\"error\":\"\\\"nomic-embed-text:latest\\\" does not support chat\"}"
+  },
+  {
+    "provider": "unsloth",
+    "model": "unsloth/gemma-4-31B-it-GGUF@UD-Q4_K_XL",
+    "ctx": 80000,
+    "error": "Unsloth /api/inference/load failed (HTTP 500): '{\"detail\":\"Failed to load model: llama-server failed to start. Check that the GGUF file is valid and you have enough memory.\"}'"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-31B-it-UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11304,
+    "gen_tokens": 300,
+    "total_tokens": 11604,
+    "gen_tps": 8.3,
+    "elapsed_s": 36.1,
+    "vram_delta_mib": 22909,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-31B-it-UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 30623,
+    "gen_tokens": 300,
+    "total_tokens": 30923,
+    "gen_tps": 2.6,
+    "elapsed_s": 114.2,
+    "vram_delta_mib": 23023,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-31B-it-UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 64000,
+    "prompt_tokens": 61799,
+    "gen_tokens": 300,
+    "total_tokens": 62099,
+    "gen_tps": 0.3,
+    "elapsed_s": 1077.3,
+    "vram_delta_mib": 22415,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-31B-it-UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11420,
+    "gen_tokens": 300,
+    "total_tokens": 11720,
+    "gen_tps": 5.2,
+    "elapsed_s": 57.6,
+    "vram_delta_mib": 22909,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-31B-it-UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 32000,
+    "prompt_tokens": 30708,
+    "gen_tokens": 300,
+    "total_tokens": 31008,
+    "gen_tps": 2.5,
+    "elapsed_s": 118.1,
+    "vram_delta_mib": 23023,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-31B-it-UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11374,
+    "gen_tokens": 300,
+    "total_tokens": 11674,
+    "gen_tps": 8.0,
+    "elapsed_s": 37.7,
+    "vram_delta_mib": 22909,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-31B-it-UD-Q4_K_XL",
+    "ctx": 32000,
+    "error": "timed out"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-31B-it-UD-Q4_K_XL",
+    "ctx": 64000,
+    "error": "HTTP 503: {\"detail\":\"llama-server is not running \u2014 POST /start first\"}"
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-31B-it-UD-Q4_K_XL",
+    "size_gb": null,
+    "ctx": 12000,
+    "prompt_tokens": 11401,
+    "gen_tokens": 300,
+    "total_tokens": 11701,
+    "gen_tps": 8.3,
+    "elapsed_s": 36.0,
+    "vram_delta_mib": 22909,
+    "nith_pass": true
+  },
+  {
+    "provider": "llama_cpp",
+    "model": "gemma-4-31B-it-UD-Q4_K_XL",
+    "ctx": 80000,
+    "error": "timed out"
+  }
+]

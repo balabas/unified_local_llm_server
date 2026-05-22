@@ -1,8 +1,19 @@
-# unified_local_llm_server
+# unified_local_model_server
 
 Unified async interface for local OpenAI-compatible LLM providers (Ollama, LM Studio, Unsloth, llama.cpp).
 
-All inference goes through a single `LocalLLM` handle obtained from `server.load_model(...)`. The server itself is only used for configuration and model management.
+All inference goes through a single `LocalLLM` handle obtained from `pool.load_model(...)`. The server itself is only used for configuration and model management.
+
+## Requirements
+
+| | |
+|---|---|
+| **OS** | Linux with systemd (Ubuntu 20.04+, Fedora 36+, or equivalent) |
+| **Python** | 3.10+ |
+| **GPU** | Optional — CUDA-capable GPU for hardware acceleration |
+| **Providers** | At least one of: Ollama, LM Studio, Unsloth Studio, llama.cpp |
+
+> **Root access required once:** `scripts/setup_service_restart.sh` must be run with `sudo` to write to `/etc/polkit-1/rules.d/` (polkit rules) and `/etc/systemd/system/` (service files) — both are root-owned system directories. The polkit rule grants the current user passwordless `systemctl restart` for the listed services only. After that, providers can be temporary reconfigured and restarted without a password from any context (terminal, Jupyter, scripts).
 
 ## Installation
 
@@ -17,24 +28,23 @@ Dependencies: `pydantic>=2.0`, `pyyaml>=6.0`. No OpenAI SDK required.
 ## Quick start
 
 ```python
-from unified_local_llm_server import LocalLLMServer
+from unified_local_model_server import LLMProviderPool
 
-server = LocalLLMServer("providers.yaml")
+pool = LLMProviderPool("providers.yaml")
 
 # Discover what's running
-for name in server.get_providers():
-    status = await server.check_provider_by_name(name)
+for name in pool.get_providers():
+    status = await pool.check_provider(name)
     print(name, "✓" if status["ok"] else "✗")
 
-# See available models
-print(server.list_downloaded_models("ollama"))   # ["llama3.2:3b", "mistral:7b", ...]
-print(server.list_loaded_models("ollama"))       # models currently in memory
+# Per-provider handle: browse models, set defaults, run inference
+ollama = pool.get_provider("ollama")
+print(ollama.list_downloaded_models())   # [{"name": "llama3.2:3b"}, ...]
 
-# Load a model handle and run inference
-llm = server.load_model("ollama", "llama3.2:3b")
-result = await llm.call(
-    messages=[{"role": "user", "content": "Hello!"}]
-)
+ollama.configure(num_parallel=2, kv_cache_type="q8_0")  # set once, inherited by all load_model calls
+
+model = ollama.load_model("llama3.2:3b")
+result = await model.call(messages=[{"role": "user", "content": "Hello!"}])
 print(result)
 ```
 
@@ -42,22 +52,25 @@ print(result)
 
 ## Provider config
 
-Create `providers.yaml` (or `providers.yml` / `providers.json`) in your working directory, or pass the path explicitly to `LocalLLMServer`. The `LOCAL_LLM_PROVIDERS` environment variable is also supported.
+Create `providers.yaml` (or `providers.yml` / `providers.json`) in your working directory, or pass the path explicitly to `LLMProviderPool`. The `LOCAL_LLM_PROVIDERS` environment variable is also supported.
 
 ```yaml
 providers:
   ollama:
+    systemd_service: ollama.service        # optional — enables restart()
     host: 127.0.0.1
     port: 11434
     health_path: /api/version
     models_path: /v1/models
 
   lm_studio:
+    systemd_service: lm_studio_serv.service
     host: 127.0.0.1
     port: 1234
     models_path: /v1/models
 
   unsloth:
+    systemd_service: unsloth_studio.service
     host: 127.0.0.1
     port: 8899
     api_key: sk-your-key
@@ -65,6 +78,7 @@ providers:
     models_path: /v1/models
 
   llama_cpp:
+    systemd_service: llama_cpp.service
     host: 127.0.0.1
     port: 8080
     health_path: /health
@@ -86,66 +100,164 @@ All fields except the provider key are optional — defaults are used when omitt
 
 ## API reference
 
-### `LocalLLMServer`
+### `LLMProviderPool`
 
 Holds the provider registry and exposes model management. Does not run inference directly.
 
 ```python
-LocalLLMServer(
+LLMProviderPool(
     config: str | Path | None = None,   # path to providers.yaml
     *,
     timeout: float = 300.0,
+    load_timeout: float = 60.0,         # max seconds to wait for model loading (applies to all providers)
     logger: AsyncLLMLogger | None = None,
 )
 ```
 
-#### `load_model` → `LocalLLM`
+#### `get_provider` → `LLMProviderPool`
 
-The primary method. Returns a `LocalLLM` handle bound to a specific provider and model.
+Returns an `LLMProviderPool` handle for a single provider — host, port, and api key resolved from the registry.
 
 ```python
-llm = server.load_model(
+ollama = pool.get_provider("ollama")
+```
+
+Use it to configure provider defaults, browse models, or call provider-specific methods directly:
+
+```python
+await ollama.check_provider()
+ollama.list_downloaded_models()
+ollama.configure(num_parallel=2)
+```
+
+#### `configure` — provider-level parameter defaults
+
+Sets server-level³ parameter defaults on a provider handle. Inherited by every subsequent `load_model()` call unless overridden per call. Returns `self` for fluent chaining.
+
+```python
+ollama = pool.get_provider("ollama")
+ollama.configure(num_parallel=2, kv_cache_type="q8_0")
+
+model1 = ollama.load_model("llama3.2:3b")     # inherits num_parallel + kv_cache_type
+model2 = ollama.load_model("mistral:7b")      # same — no restart if config unchanged
+model3 = ollama.load_model("phi4", num_parallel=4)  # override for this model only
+```
+
+Fluent chaining:
+
+```python
+model = pool.get_provider("ollama").configure(num_parallel=2).load_model("llama3.2:3b")
+```
+
+#### `load_model` → `LocalLLM`
+
+Returns a `LocalLLM` handle bound to a specific provider and model.
+
+```python
+model = pool.load_model(
     provider: str,                       # registry key: "ollama", "lm_studio", …
     model: str,                          # model id: "llama3.2:3b", "mistral:7b", …
     *,
     logger: AsyncLLMLogger | None = None,
     context_length: int | None = None,   # shortcut for options={"num_ctx": N}
     timeout: float | None = None,
-    **defaults,                          # default call kwargs applied to every llm.call()
+    load_timeout: float | None = None,   # override server-level load_timeout for this handle
+    # --- load-time parameters (see table below) ---
+    gpu_layers: int | None = None,
+    ngl: int | None = None,              # alias for gpu_layers
+    cmoe: bool | None = None,
+    cpu_moe: int | None = None,
+    flash_attn: bool | None = None,
+    batch_size: int | None = None,
+    kv_offload: bool | None = None,
+    num_experts: int | None = None,
+    threads: int | None = None,
+    main_gpu: int | None = None,
+    gpu_offload: float | str | None = None,  # LM Studio: lms load --gpu <value>
+    load_params: dict | None = None,     # arbitrary provider-specific params (escape hatch)
+    # --- server-restart level params³ (auto-restarts if value changes; set via configure() to apply once) ---
+    num_parallel: int | None = None,
+    kv_cache_type: str | None = None,
+    gpu_overhead: int | None = None,
+    max_loaded_models: int | None = None,
+    **defaults,                          # default call kwargs applied to every model.call()
                                          # e.g. temperature=0.2, options={"max_tokens": 512}
 )
 ```
 
 Connection overrides (`host`, `port`, `api_key`, `base_path`, …) are also accepted but rarely needed when using a registry.
 
+#### Load parameters
+
+Named params use **llama.cpp names** as the canonical form. Each provider receives the equivalent field name automatically.
+
+`load_params` is an escape hatch that accepts any provider-specific key/value pairs merged into the load request body. Named params take precedence over `load_params` values on conflict.
+
+| Parameter | Type | llama_cpp | Ollama | LM Studio | Unsloth |
+|-----------|------|-----------|--------|-----------|---------|
+| `context_length` | `int` | `ctx_size` | `num_ctx` | `context_length` | `max_seq_length` |
+| `gpu_layers` / `ngl` | `int` | `gpu_layers` | `num_gpu`¹ | — | — |
+| `cmoe` | `bool` | `cmoe` | — | — | — |
+| `cpu_moe` | `int` | `cpu_moe` | — | — | — |
+| `flash_attn` | `bool` | `flash_attn` | — | `flash_attention` | — |
+| `batch_size` | `int` | `batch_size` | `num_batch` | `eval_batch_size` | — |
+| `kv_offload` | `bool` | `kv_offload` | — | `offload_kv_cache_to_gpu` | — |
+| `num_experts` | `int` | — | — | `num_experts` | — |
+| `threads` | `int` | `threads` | `num_thread` | — | — |
+| `main_gpu` | `int` | `main_gpu` | `main_gpu` | — | — |
+| `gpu_offload` | `float\|str` | — | — | `lms load --gpu`² | — |
+| `load_params` | `dict` | merged as-is | merged into options | merged as-is | merged as-is |
+
+¹ Ollama `num_gpu` can also be set via `load_params={"num_gpu": N}` or `options={"num_gpu": N}`.
+² `gpu_offload` for LM Studio uses the `lms` CLI (`lms load <model> --gpu <value>`). Accepts `0.0`–`1.0` fraction, `"max"`, or `"off"`. Requires `lms` on `PATH`.
+
+Any other llama-server flag (see `llama_server_manager.available_params()`) can be passed via `load_params`.
+
+#### Server-restart parameters³
+
+These take effect by restarting the provider service. The pool restarts automatically when a value changes; no restart if the config is already current. Set once with `configure()` to avoid repeating per call.
+
+| Parameter | Type | Ollama env var | llama_cpp env var | Notes |
+|-----------|------|----------------|-------------------|-------|
+| `num_parallel` | `int` | `OLLAMA_NUM_PARALLEL` | `LLAMA_ARG_N_PARALLEL` | concurrent inference streams |
+| `flash_attn` | `bool` | `OLLAMA_FLASH_ATTENTION` | — | Ollama: restart; llama_cpp / LM Studio: load-time |
+| `kv_cache_type` | `str` | `OLLAMA_KV_CACHE_TYPE` | — | e.g. `"q8_0"`, `"q4_0"` |
+| `gpu_overhead` | `int` | `OLLAMA_GPU_OVERHEAD` | — | bytes reserved outside models |
+| `max_loaded_models` | `int` | `OLLAMA_MAX_LOADED_MODELS` | — | models kept resident in VRAM |
+
+³ Requires `systemd_service` set in `providers.yaml`.
+
 #### Model management
 
 ```python
-server.get_providers()                    # ["llama_cpp", "lm_studio", "ollama", "unsloth"]
-await server.check_provider_by_name("ollama")
+pool.get_providers()               # ["llama_cpp", "lm_studio", "ollama", "unsloth"]
+await pool.check_provider("ollama")
 # {"ok": True, "provider": "ollama", "server_url": "http://127.0.0.1:11434", ...}
 
-server.list_downloaded_models("ollama")   # all models on disk: ["llama3.2:3b", ...]
-server.list_loaded_models("ollama")       # models currently in memory
-server.list_loaded_instances("lm_studio") # {model_key: instance_id} — LM Studio only
-server.unload_all_models("ollama")        # {"unloaded": ["llama3.2:3b"]}
+provider = pool.get_provider("ollama")
+provider.list_downloaded_models()  # all models on disk: [{"name": "llama3.2:3b"}, ...]
+provider.list_loaded_models()      # models currently in memory
+provider.unload_all_models()       # {"unloaded": ["llama3.2:3b"]}
 
-# Omit provider to get a dict across all providers
-server.list_downloaded_models()           # {"ollama": [...], "lm_studio": [...], ...}
-server.list_loaded_models()
-server.unload_all_models()
+provider = pool.get_provider("lm_studio")
+provider.list_loaded_instances()   # {model_key: instance_id}
+
+# Pool-level: pass provider name, or None for all providers at once
+pool.list_downloaded_models("ollama")
+pool.list_downloaded_models(None)  # {"ollama": [...], "lm_studio": [...], ...}
+pool.unload_all_models(None)       # unreachable providers return {"unloaded": [], "error": "..."}
 ```
 
 ---
 
 ### `LocalLLM`
 
-Model handle for all inference. Created by `server.load_model(...)`.
+Model handle for all inference. Created by `pool.load_model(...)`.
 
-#### `llm.call`
+#### `model.call`
 
 ```python
-result = await llm.call(
+result = await model.call(
     messages: list[dict],                # required — OpenAI chat message list
     *,
     think: bool = False,                 # enable chain-of-thought / reasoning
@@ -158,6 +270,7 @@ result = await llm.call(
     max_tool_rounds: int = 5,            # max LLM ↔ tool iterations
     max_json_fix_retries: int = 3,       # retries when structured output parsing fails
     max_loop_retries: int = 5,           # retries when output loop is detected
+    load_timeout: float | None = None,   # override load_timeout for this call only
 )
 ```
 
@@ -167,20 +280,20 @@ Defaults set at `load_model` time are merged with per-call kwargs. Per-call valu
 
 ```python
 # temperature=0.2 applied to every call unless overridden
-llm = server.load_model("ollama", "llama3.2:3b", temperature=0.2)
+model = pool.load_model("ollama", "llama3.2:3b", temperature=0.2)
 
-result = await llm.call(
+result = await model.call(
     messages=[{"role": "user", "content": "Hi"}],
     options={"max_tokens": 100},
 )
 ```
 
-#### `llm.batch`
+#### `model.batch`
 
 Run multiple calls concurrently with a semaphore.
 
 ```python
-results = await llm.batch(
+results = await model.batch(
     items=[
         [{"role": "user", "content": "Question 1"}],
         [{"role": "user", "content": "Question 2"}],
@@ -238,7 +351,7 @@ TOOL_REGISTRY = {
     "add":      lambda args: str(args["a"] + args["b"]),
 }
 
-result = await llm.call(
+result = await model.call(
     messages=[{"role": "user", "content": "What is 123 + 456, and what time is it?"}],
     tools=TOOLS,
     tool_registry=TOOL_REGISTRY,
@@ -279,7 +392,7 @@ def make_handler(name):
 TOOLS         = [to_openai_tool(t) for t in mcp_tools]
 TOOL_REGISTRY = {t.name: make_handler(t.name) for t in mcp_tools}
 
-result = await llm.call(
+result = await model.call(
     messages=[{"role": "user", "content": "Search for Python 3.13 new features."}],
     tools=TOOLS,
     tool_registry=TOOL_REGISTRY,
@@ -303,7 +416,7 @@ schema = {
     "required": ["name", "score"],
 }
 
-result = await llm.call(
+result = await model.call(
     messages=[{"role": "user", "content": "Extract: Alice scored 42 points."}],
     schema_dict=schema,
 )
@@ -317,12 +430,12 @@ result = await llm.call(
 `AsyncLLMLogger` writes a structured stream log of every request/response pair, including thinking blocks, tool execution results, and timing.
 
 ```python
-from unified_local_llm_server.llm_logger import AsyncLLMLogger
+from unified_local_model_server.model_logger import AsyncLLMLogger
 
 logger = AsyncLLMLogger("logs/session.log")
-llm    = server.load_model("ollama", "llama3.2:3b", logger=logger)
+model    = pool.load_model("ollama", "llama3.2:3b", logger=logger)
 
-await llm.call(...)
+await model.call(...)
 
 await logger.close()
 ```
@@ -339,6 +452,22 @@ Log format markers:
 
 Set `LOG_MSG_REFS=1` to deduplicate repeated messages using SHA1 refs (useful in long tool-call sessions).
 
+#### `restart`
+
+Recovery action — restarts a frozen or crashed provider service. Requires `systemd_service` in `providers.yaml`.
+
+```python
+provider = pool.get_provider("ollama")
+provider.restart()
+# {"service": "ollama.service", "method": "user", "returncode": 0, "waited_s": 3.1}
+
+pool.restart("llama_cpp", wait_timeout=60.0)
+```
+
+Tries `systemctl --user restart` → `systemctl restart` (polkit) → `sudo -n systemctl restart` in order. Polls the health endpoint until reachable before returning.
+
+Server-level parameters³ (`num_parallel`, `kv_cache_type`, …) are set via `configure()` or `load_model()` — the pool restarts automatically when a value changes. Pass `env=` to inject raw env vars on a manual restart.
+
 ---
 
 ### Unsloth — automatic model loading
@@ -347,10 +476,10 @@ Unsloth models are loaded on demand before the first inference call. Pass the `r
 
 ```python
 # shorthand — resolved to the actual .gguf path
-llm = server.load_model("unsloth", "unsloth/gpt-oss-20b-GGUF@UD-Q4_K_XL")
+model = pool.load_model("unsloth", "unsloth/gpt-oss-20b-GGUF@UD-Q4_K_XL")
 
 # or explicit path
-llm = server.load_model("unsloth", "/mnt/models/gpt-oss-20b-UD-Q4_K_XL.gguf")
+model = pool.load_model("unsloth", "/mnt/models/gpt-oss-20b-UD-Q4_K_XL.gguf")
 ```
 
 If the model is already loaded on the server, the load step is skipped.
@@ -361,6 +490,6 @@ If the model is already loaded on the server, the load step is skipped.
 
 | Variable | Purpose |
 |----------|---------|
-| `LOCAL_LLM_PROVIDERS` | Path to providers config file (fallback when no path given to `LocalLLMServer`) |
+| `LOCAL_LLM_PROVIDERS` | Path to providers config file (fallback when no path given to `LLMProviderPool`) |
 | `UNSLOTH_KEY` / `UNSLOTH_API_KEY` | Unsloth API key |
 | `LOG_MSG_REFS` | Set to `1` to deduplicate repeated messages in logs by SHA1 reference |
