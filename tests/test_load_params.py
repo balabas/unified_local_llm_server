@@ -199,6 +199,8 @@ class LoadParamsUnslothTests(unittest.IsolatedAsyncioTestCase):
     async def _call_or_skip(self, **kwargs) -> str:
         try:
             return await _call(self.pool, "unsloth", self.model, **kwargs)
+        except asyncio.TimeoutError as exc:
+            self.skipTest(f"unsloth model load timed out after {MAX_WAIT}s: {exc}")
         except RuntimeError as exc:
             msg = str(exc)
             if "HTTP 500" in msg or "HTTP 503" in msg or "load" in msg.lower():

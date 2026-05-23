@@ -61,7 +61,7 @@ class ToolPipeline:
     """Stateless pipeline for the tool-call round-trip inside ``pool._call()``."""
 
     def normalize_tool_calls(
-        self, tool_calls: list[dict[str, Any]] | None
+        self, tool_calls: list[Any] | None
     ) -> list[dict[str, Any]]:
         """Normalise raw tool-call objects into a consistent ``{id, type, function}`` shape.
 
@@ -75,15 +75,19 @@ class ToolPipeline:
         """
         normalized: list[dict[str, Any]] = []
         for idx, call in enumerate(tool_calls or []):
-            function = call.get("function") or {}
-            name = function.get("name") or call.get("name")
+            function = self._get_value(call, "function") or {}
+            name = self._get_value(function, "name") or self._get_value(call, "name")
             if not name:
                 continue
-            arguments = function.get("arguments", call.get("arguments", {}))
+            arguments = self._get_value(
+                function,
+                "arguments",
+                self._get_value(call, "arguments", {}),
+            )
             normalized.append(
                 {
-                    "id": str(call.get("id") or f"tool_call_{idx}"),
-                    "type": call.get("type", "function"),
+                    "id": str(self._get_value(call, "id") or f"tool_call_{idx}"),
+                    "type": self._get_value(call, "type", "function"),
                     "function": {
                         "name": str(name),
                         "arguments": self._parse_arguments(arguments),
@@ -181,6 +185,12 @@ class ToolPipeline:
     # ------------------------------------------------------------------
     # Private helpers
     # ------------------------------------------------------------------
+
+    def _get_value(self, obj: Any, key: str, default: Any = None) -> Any:
+        """Read ``key`` from either a dict-like object or an attribute object."""
+        if isinstance(obj, dict):
+            return obj.get(key, default)
+        return getattr(obj, key, default)
 
     def _parse_arguments(self, arguments: Any) -> dict[str, Any]:
         """Coerce tool-call arguments to a dict regardless of how they arrived.

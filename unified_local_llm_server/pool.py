@@ -666,6 +666,21 @@ class LLMProviderPool:
                 if delta_content:
                     content_parts.append(delta_content)
                     _fire_log(delta_content, False)
+                for idx, tc in enumerate(msg.get("tool_calls") or []):
+                    if idx not in tool_calls_acc:
+                        tool_calls_acc[idx] = {"id": f"tool_call_{idx}", "name": "", "arguments": ""}
+                    if tc.get("id"):
+                        tool_calls_acc[idx]["id"] = tc["id"]
+                    fn = tc.get("function") or {}
+                    name = fn.get("name") or tc.get("name")
+                    if name:
+                        tool_calls_acc[idx]["name"] = name
+                    arguments = fn.get("arguments", tc.get("arguments", ""))
+                    if arguments:
+                        if isinstance(arguments, str):
+                            tool_calls_acc[idx]["arguments"] += arguments
+                        else:
+                            tool_calls_acc[idx]["arguments"] = _json.dumps(arguments, ensure_ascii=False)
                 if chunk.get("done"):
                     prompt_tok = chunk.get("prompt_eval_count", 0)
                     completion_tok = chunk.get("eval_count", 0)
@@ -1027,12 +1042,18 @@ class LLMProviderPool:
         deadline = time.monotonic() + wait_timeout
         while time.monotonic() < deadline:
             try:
-                srv._provider_transport.get_json_sync(srv.config.health_path or srv.config.models_path)
-                waited = round(wait_timeout - (deadline - time.monotonic()), 1)
-                _remove_dropin()
-                return {"service": service, "method": chosen_method, "returncode": 0, "waited_s": waited}
+                result = srv._provider_transport._do_request(
+                    "GET",
+                    srv.config.health_path or srv.config.models_path,
+                    None,
+                )
+                if result.status < 400:
+                    waited = round(wait_timeout - (deadline - time.monotonic()), 1)
+                    _remove_dropin()
+                    return {"service": service, "method": chosen_method, "returncode": 0, "waited_s": waited}
             except TransportError:
-                time.sleep(poll_interval)
+                pass
+            time.sleep(poll_interval)
 
         _remove_dropin()
         return {"service": service, "method": chosen_method, "returncode": 0,
@@ -1193,21 +1214,24 @@ class LLMProviderPool:
 
         if self.config.health_path is not None:
             try:
-                data = await self._provider_transport.get_json(self.config.health_path)
+                result = await self._provider_transport._request("GET", self.config.health_path, None)
+                data = result.json()
+                if result.status >= 400:
+                    return {
+                        "provider": self.provider,
+                        "server_url": self.server_url,
+                        "ok": False,
+                        "kind": "health",
+                        "status": result.status,
+                        "error": result.text,
+                    }
                 return {
                     "provider": self.provider,
                     "server_url": self.server_url,
                     "ok": True,
                     "kind": "health",
+                    "status": result.status,
                     "data": data,
-                }
-            except json.JSONDecodeError:
-                return {
-                    "provider": self.provider,
-                    "server_url": self.server_url,
-                    "ok": True,
-                    "kind": "health",
-                    "data": None,
                 }
             except Exception as exc:
                 return {
@@ -1219,12 +1243,23 @@ class LLMProviderPool:
                 }
 
         try:
-            data = await self._provider_transport.get_json(self.config.models_path)
+            result = await self._provider_transport._request("GET", self.config.models_path, None)
+            data = result.json()
+            if result.status >= 400:
+                return {
+                    "provider": self.provider,
+                    "server_url": self.server_url,
+                    "ok": False,
+                    "kind": "models",
+                    "status": result.status,
+                    "error": result.text,
+                }
             return {
                 "provider": self.provider,
                 "server_url": self.server_url,
                 "ok": True,
                 "kind": "models",
+                "status": result.status,
                 "data": data,
             }
         except Exception as exc:

@@ -9,7 +9,7 @@ All inference goes through a single `LocalLLM` handle obtained from `pool.load_m
 | | |
 |---|---|
 | **OS** | Linux with systemd (Ubuntu 20.04+, Fedora 36+, or equivalent) |
-| **Python** | 3.10+ |
+| **Python** | 3.12+ |
 | **GPU** | Optional — CUDA-capable GPU for hardware acceleration |
 | **Providers** | At least one of: Ollama, LM Studio, Unsloth Studio, llama.cpp |
 
@@ -82,7 +82,7 @@ providers:
     host: 127.0.0.1
     port: 8899
     api_key: sk-your-key
-    health_path: /api/health
+    health_path: /health
     models_path: /v1/models
 
   llama_cpp:

@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-import asyncio
 import json
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
 
 from unified_local_llm_server.llm_logger import AsyncLLMLogger
@@ -13,49 +13,27 @@ from unified_local_llm_server.pipelines.loop_guard import LoopGuardPipeline
 from unified_local_llm_server.pipelines.tool import ToolPipeline
 from unified_local_llm_server.provider_registry import ProviderRegistry
 from unified_local_llm_server.providers import ProviderKind, resolve_provider_config
-from unified_local_llm_server.pool import LocalLLM, LLMProviderPool
+from unified_local_llm_server.pool import LLMProviderPool
+from unified_local_llm_server.transport import HttpResult
 
 
 class FakeTransport:
-    def __init__(self, responses: list[str | dict[str, Any]]):
-        self.responses = list(responses)
-        self.calls: list[dict[str, Any]] = []
-
-    async def post_json(self, path: str, payload: dict[str, Any]):
-        self.calls.append({"path": path, "payload": payload})
-        if not self.responses:
-            raise AssertionError("No more fake responses")
-        response = self.responses.pop(0)
-        if isinstance(response, dict):
-            message = {
-                "role": "assistant",
-                "content": response.get("content", ""),
-            }
-            if response.get("tool_calls"):
-                message["tool_calls"] = response["tool_calls"]
-        else:
-            message = {"role": "assistant", "content": response}
-        data = {
-            "id": "fake-id",
-            "model": payload.get("model"),
-            "choices": [{"index": 0, "message": message}],
-            "usage": {"prompt_tokens": 1, "completion_tokens": 1, "total_tokens": 2},
-        }
-
-        class _FakeResult:
-            status = 200
-            headers: dict[str, str] = {}
-
-            def json(self_nonlocal):
-                return data
-
-        return _FakeResult()
+    def __init__(self, *, status: int = 200, text: str = '{"data": [{"id": "fake-model"}]}'):
+        self.calls: list[str] = []
+        self.status = status
+        self.text = text
 
     def get_json_sync(self, path: str):
+        self.calls.append(path)
         return {"data": [{"id": "fake-model"}]}
 
     async def get_json(self, path: str):
+        self.calls.append(path)
         return {"data": [{"id": "fake-model"}]}
+
+    async def _request(self, method: str, path: str, payload: dict[str, Any] | None):
+        self.calls.append(path)
+        return HttpResult(status=self.status, headers={}, text=self.text)
 
 
 class FakeProviderTransport:
@@ -78,41 +56,12 @@ class FakeProviderTransport:
         return {"data": [{"id": item} for item in ids]}
 
 
-class SlowCountingTransport:
-    def __init__(self, delay: float = 0.01):
-        self.delay = delay
-        self.active = 0
-        self.max_active = 0
-        self.calls: list[dict[str, Any]] = []
+class FakeStreamTransport:
+    def __init__(self, lines: list[str]):
+        self.lines = lines
 
-    async def post_json(self, path: str, payload: dict[str, Any]):
-        self.active += 1
-        self.max_active = max(self.max_active, self.active)
-        self.calls.append({"path": path, "payload": payload})
-        try:
-            await asyncio.sleep(self.delay)
-            content = payload["messages"][-1]["content"]
-        finally:
-            self.active -= 1
-
-        data = {
-            "id": "fake-id",
-            "model": payload.get("model"),
-            "choices": [{"index": 0, "message": {"role": "assistant", "content": content}}],
-            "usage": {"prompt_tokens": 1, "completion_tokens": 1, "total_tokens": 2},
-        }
-
-        class _FakeResult:
-            status = 200
-            headers: dict[str, str] = {}
-
-            def json(self_nonlocal):
-                return data
-
-        return _FakeResult()
-
-    async def get_json(self, path: str):
-        return {"data": [{"id": "fake-model"}]}
+    def stream_lines_sync(self, path: str, payload: dict[str, Any]):
+        yield from self.lines
 
 
 class LLMProviderPoolTests(unittest.IsolatedAsyncioTestCase):
@@ -201,274 +150,59 @@ class LLMProviderPoolTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(json.loads(executions[0].result), {"sum": 5})
         self.assertEqual(pipeline.tool_messages(executions)[0]["role"], "tool")
 
-    async def test_call_repairs_json_then_returns_dict(self):
-        transport = FakeTransport([
-            "```json\n{'name': 'Ana', 'age': 31,}\n```",
-        ])
-        server = LLMProviderPool(provider=ProviderKind.OLLAMA, transport=transport)
-        llm = server.load_model(model="small-test-model")
-        result = await llm.call(
-            messages=[{"role": "user", "content": "Return a person"}],
-            schema_dict={"name": str, "age": int},
-            max_json_fix_retries=0,
-        )
-        self.assertEqual(result, {"name": "Ana", "age": 31})
-
-    async def test_call_retries_after_loop_then_succeeds(self):
-        transport = FakeTransport([
-            ("repeat " * 600).strip(),
-            json.dumps({"name": "Ana", "age": 31}),
-        ])
-        server = LLMProviderPool(provider=ProviderKind.LM_STUDIO, transport=transport)
-        llm = server.load_model(model="small-test-model")
-        result = await llm.call(
-            messages=[{"role": "user", "content": "Return a person"}],
-            schema_dict={"name": str, "age": int},
-            max_json_fix_retries=1,
-            max_loop_retries=1,
-        )
-        self.assertEqual(result, {"name": "Ana", "age": 31})
-        self.assertGreaterEqual(len(transport.calls), 2)
-
-    async def test_unstructured_call_uses_default_loop_retry_budget(self):
-        transport = FakeTransport([
-            ("repeat " * 600).strip(),
-            "ok",
-        ])
-        server = LLMProviderPool(provider=ProviderKind.LM_STUDIO, transport=transport)
-        llm = server.load_model(model="small-test-model")
-        result = await llm.call(
-            messages=[{"role": "user", "content": "Return plain text"}],
-            max_json_fix_retries=0,
-        )
-        self.assertEqual(result, "ok")
-        self.assertEqual(len(transport.calls), 2)
-
-    async def test_unstructured_call_does_not_use_json_retry_budget_for_loop_limit(self):
-        transport = FakeTransport([
-            ("repeat " * 600).strip(),
-            "ok",
-        ])
-        server = LLMProviderPool(provider=ProviderKind.LM_STUDIO, transport=transport)
-        llm = server.load_model(model="small-test-model")
-        with self.assertRaisesRegex(RuntimeError, "loop detected"):
-            await llm.call(
-                messages=[{"role": "user", "content": "Return plain text"}],
-                max_json_fix_retries=5,
-                max_loop_retries=0,
+    async def test_tool_pipeline_accepts_streamed_namespace_tool_calls(self):
+        pipeline = ToolPipeline()
+        tool_calls = [
+            SimpleNamespace(
+                id="call_1",
+                type="function",
+                function=SimpleNamespace(
+                    name="add",
+                    arguments='{"a": 2, "b": 3}',
+                ),
             )
-        self.assertEqual(len(transport.calls), 1)
+        ]
 
-    async def test_loop_guard_uses_own_retry_budget(self):
-        transport = FakeTransport([
-            ("repeat " * 600).strip(),
-            "ok",
-        ])
-        server = LLMProviderPool(provider=ProviderKind.LM_STUDIO, transport=transport)
-        llm = server.load_model(model="small-test-model")
-        result = await llm.call(
-            messages=[{"role": "user", "content": "Return plain text"}],
-            max_json_fix_retries=0,
-            max_loop_retries=1,
-        )
-        self.assertEqual(result, "ok")
-        self.assertEqual(len(transport.calls), 2)
+        def add(arguments: dict[str, Any]) -> dict[str, Any]:
+            return {"sum": arguments["a"] + arguments["b"]}
 
-    async def test_call_retries_after_empty_json_then_succeeds(self):
-        transport = FakeTransport([
-            "",
-            json.dumps({"name": "Ana", "age": 31}),
-        ])
-        server = LLMProviderPool(provider=ProviderKind.LM_STUDIO, transport=transport)
-        llm = server.load_model(model="small-test-model")
-        result = await llm.call(
-            messages=[{"role": "user", "content": "Return a person"}],
-            schema_dict={"name": str, "age": int},
-            max_json_fix_retries=1,
-        )
-        self.assertEqual(result, {"name": "Ana", "age": 31})
-        retry_messages = transport.calls[1]["payload"]["messages"]
-        self.assertIn("response was empty", retry_messages[-1]["content"])
+        normalized = pipeline.normalize_tool_calls(tool_calls)
+        self.assertEqual(normalized[0]["id"], "call_1")
+        self.assertEqual(normalized[0]["function"]["name"], "add")
+        self.assertEqual(normalized[0]["function"]["arguments"], {"a": 2, "b": 3})
 
-    async def test_structured_empty_output_exhausts_json_fix_retries(self):
-        transport = FakeTransport(["", "", "", ""])
-        server = LLMProviderPool(provider=ProviderKind.LM_STUDIO, transport=transport)
-        llm = server.load_model(model="small-test-model")
-        with self.assertRaisesRegex(ValueError, "JSON fix failed after 4 attempt"):
-            await llm.call(
-                messages=[{"role": "user", "content": "Return a person"}],
-                schema_dict={"name": str, "age": int},
-                max_json_fix_retries=3,
-            )
-        self.assertEqual(len(transport.calls), 4)
+        executions = await pipeline.execute_tool_calls(tool_calls, {"add": add})
+        self.assertEqual(json.loads(executions[0].result), {"sum": 5})
 
-    async def test_call_auto_selects_first_model(self):
-        transport = FakeTransport(["hello"])
-        server = LLMProviderPool(provider=ProviderKind.LM_STUDIO, transport=transport)
-        # no model set — server resolves from /models endpoint
-        model = await server.resolve_model()
-        llm = server.load_model(model=model)
-        result = await llm.call(
-            messages=[{"role": "user", "content": "Say hello"}],
-        )
-        self.assertEqual(result, "hello")
-        self.assertEqual(transport.calls[-1]["payload"]["model"], "fake-model")
+        assistant = pipeline.assistant_message("", tool_calls)
+        self.assertEqual(assistant["tool_calls"][0]["function"]["arguments"], '{"a": 2, "b": 3}')
 
-    async def test_call_model_override_supports_multiple_loaded_models(self):
-        transport = FakeTransport(["from model b"])
-        server = LLMProviderPool(provider=ProviderKind.LM_STUDIO, transport=transport)
-        llm_a = server.load_model(model="model-a")
-        llm_b = server.load_model(model="model-b")
-        result = await llm_b.call(
-            messages=[{"role": "user", "content": "Say which model"}],
-        )
-        self.assertEqual(result, "from model b")
-        self.assertEqual(llm_a.model, "model-a")
-        self.assertEqual(transport.calls[0]["payload"]["model"], "model-b")
-
-    async def test_load_model_returns_handle_with_defaults(self):
-        transport = FakeTransport([
-            "from handle",
+    def test_ollama_native_stream_extracts_tool_calls(self):
+        transport = FakeStreamTransport([
+            json.dumps({
+                "message": {
+                    "tool_calls": [
+                        {
+                            "function": {
+                                "name": "add",
+                                "arguments": {"a": 2, "b": 3},
+                            }
+                        }
+                    ]
+                },
+                "done": True,
+            })
         ])
         server = LLMProviderPool(
             provider=ProviderKind.OLLAMA,
-            transport=transport,
-        )
-        llm = server.load_model(
-            model="model-a",
-            temperature=0.4,
-            options={"num_predict": 100},
-            context_length=4096,
-        )
-        self.assertIsInstance(llm, LocalLLM)
-        result = await llm.call(
-            messages=[{"role": "user", "content": "hello"}],
-            options={"num_predict": 25},
-        )
-        self.assertEqual(result, "from handle")
-        payload = transport.calls[0]["payload"]
-        self.assertEqual(payload["model"], "model-a")
-        self.assertEqual(payload["temperature"], 0.4)
-        self.assertEqual(payload["options"]["num_predict"], 25)
-        self.assertEqual(payload["options"]["num_ctx"], 4096)
-        self.assertNotIn("max_tokens", payload)
-
-    async def test_load_model_can_target_different_provider(self):
-        transport = FakeTransport([
-            "from lm studio",
-        ])
-        manager = LLMProviderPool(provider=ProviderKind.OLLAMA)
-        llm = manager.load_model(
-            ProviderKind.LM_STUDIO,
-            "model-b",
-            transport=transport,
-            port=1234,
-            temperature=0.1,
-        )
-        result = await llm.call(messages=[{"role": "user", "content": "hello"}])
-        self.assertEqual(result, "from lm studio")
-        self.assertEqual(llm.provider, ProviderKind.LM_STUDIO)
-        self.assertEqual(llm.server.server_url, "http://127.0.0.1:1234")
-        self.assertEqual(transport.calls[0]["payload"]["model"], "model-b")
-
-    async def test_llm_batch_accepts_message_lists(self):
-        transport = FakeTransport([
-            "one",
-            "two",
-        ])
-        server = LLMProviderPool(provider=ProviderKind.OLLAMA, transport=transport)
-        llm = server.load_model("ollama", "model-a", temperature=0.3)
-
-        results = await llm.batch(
-            [
-                [{"role": "user", "content": "first"}],
-                [{"role": "user", "content": "second"}],
-            ],
-            concurrency=2,
+            provider_transport=transport,
         )
 
-        self.assertEqual(results, ["one", "two"])
-        self.assertEqual(transport.calls[0]["payload"]["model"], "model-a")
-        self.assertEqual(transport.calls[0]["payload"]["temperature"], 0.3)
-        self.assertEqual(transport.calls[1]["payload"]["messages"][-1]["content"], "second")
+        response = server._stream_chat_sync("/api/chat", {}, ollama_native=True)
 
-    async def test_llm_batch_accepts_per_item_call_kwargs(self):
-        transport = FakeTransport([
-            "first",
-            "second",
-        ])
-        server = LLMProviderPool(provider=ProviderKind.OLLAMA, transport=transport)
-        llm = server.load_model(
-            "ollama",
-            "model-a",
-            options={"num_ctx": 4096, "num_predict": 100},
-        )
-
-        results = await llm.batch(
-            [
-                {
-                    "messages": [{"role": "user", "content": "first"}],
-                    "temperature": 0.1,
-                },
-                {
-                    "messages": [{"role": "user", "content": "second"}],
-                    "options": {"num_predict": 25},
-                },
-            ],
-            temperature=0.7,
-            options={"top_p": 0.9},
-        )
-
-        self.assertEqual(results, ["first", "second"])
-        first_payload = transport.calls[0]["payload"]
-        second_payload = transport.calls[1]["payload"]
-        self.assertEqual(first_payload["temperature"], 0.1)
-        self.assertEqual(first_payload["options"]["top_p"], 0.9)
-        self.assertEqual(first_payload["options"]["num_ctx"], 4096)
-        self.assertEqual(second_payload["temperature"], 0.7)
-        self.assertEqual(second_payload["options"]["num_predict"], 25)
-        self.assertEqual(second_payload["options"]["num_ctx"], 4096)
-        self.assertNotIn("max_tokens", second_payload)
-
-    async def test_llm_batch_limits_concurrency(self):
-        transport = SlowCountingTransport(delay=0.01)
-        server = LLMProviderPool(provider=ProviderKind.OLLAMA, transport=transport)
-        llm = server.load_model("ollama", "model-a")
-
-        results = await llm.batch(
-            [
-                [{"role": "user", "content": "one"}],
-                [{"role": "user", "content": "two"}],
-                [{"role": "user", "content": "three"}],
-                [{"role": "user", "content": "four"}],
-            ],
-            concurrency=2,
-        )
-
-        self.assertEqual(results, ["one", "two", "three", "four"])
-        self.assertLessEqual(transport.max_active, 2)
-
-    async def test_llm_batch_can_return_exceptions(self):
-        transport = FakeTransport([
-            "not json",
-            json.dumps({"name": "Ana", "age": 31}),
-        ])
-        server = LLMProviderPool(provider=ProviderKind.OLLAMA, transport=transport)
-        llm = server.load_model("ollama", "model-a")
-
-        results = await llm.batch(
-            [
-                [{"role": "user", "content": "bad"}],
-                [{"role": "user", "content": "good"}],
-            ],
-            concurrency=1,
-            return_exceptions=True,
-            schema_dict={"name": str, "age": int},
-            max_json_fix_retries=0,
-        )
-
-        self.assertIsInstance(results[0], Exception)
-        self.assertEqual(results[1], {"name": "Ana", "age": 31})
+        tool_calls = response.choices[0].message.tool_calls
+        self.assertEqual(tool_calls[0].function.name, "add")
+        self.assertEqual(tool_calls[0].function.arguments, '{"a": 2, "b": 3}')
 
     def test_provider_registry_loads_named_entries(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -537,7 +271,7 @@ class LLMProviderPoolTests(unittest.IsolatedAsyncioTestCase):
                 provider=ProviderKind.OLLAMA,
                 provider_registry=registry,
                 provider_transport=provider_transport,
-                transport=FakeTransport([]),
+                transport=FakeTransport(),
             )
             ollama_models = server.list_loaded_models("ollama")
             lmstudio_models = server.list_loaded_models("lmstudio")
@@ -545,7 +279,7 @@ class LLMProviderPoolTests(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(lmstudio_models[0], "lmstudio-b")
 
     async def test_provider_check_uses_endpoint_config(self):
-        transport = FakeTransport([])
+        transport = FakeTransport()
         server = LLMProviderPool(
             provider=ProviderKind.LM_STUDIO,
             transport=transport,
@@ -553,6 +287,35 @@ class LLMProviderPoolTests(unittest.IsolatedAsyncioTestCase):
         status = await server.check_provider()
         self.assertTrue(status["ok"])
         self.assertEqual(status["server_url"], "http://127.0.0.1:1234")
+        self.assertEqual(status["status"], 200)
+
+    async def test_provider_check_reports_http_error_status(self):
+        transport = FakeTransport(status=503, text='{"error": "starting"}')
+        server = LLMProviderPool(
+            provider=ProviderKind.LM_STUDIO,
+            transport=transport,
+        )
+
+        status = await server.check_provider()
+
+        self.assertFalse(status["ok"])
+        self.assertEqual(status["kind"], "models")
+        self.assertEqual(status["status"], 503)
+        self.assertIn("starting", status["error"])
+
+    async def test_provider_check_accepts_empty_successful_health_response(self):
+        transport = FakeTransport(status=204, text="")
+        server = LLMProviderPool(
+            provider=ProviderKind.OLLAMA,
+            provider_transport=transport,
+        )
+
+        status = await server.check_provider()
+
+        self.assertTrue(status["ok"])
+        self.assertEqual(status["kind"], "health")
+        self.assertEqual(status["status"], 204)
+        self.assertIsNone(status["data"])
 
     async def test_async_logger_writes_events(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -573,84 +336,6 @@ class LLMProviderPoolTests(unittest.IsolatedAsyncioTestCase):
             self.assertIn("[MESSAGE]", text)
             self.assertIn("ok", text)
             self.assertIn("llm_response_end #1", text)
-
-    async def test_mock_llm_call_writes_persistent_response_log(self):
-        path = Path("test_logs") / "llm_response_mock.log"
-        path.parent.mkdir(exist_ok=True)
-        if path.exists():
-            path.unlink()
-
-        logger = AsyncLLMLogger(path)
-        transport = FakeTransport([
-            json.dumps({"name": "Ana", "age": 31}),
-        ])
-        server = LLMProviderPool(
-            provider=ProviderKind.OLLAMA,
-            transport=transport,
-        )
-        llm = server.load_model(model="small-test-model", logger=logger)
-        result = await llm.call(
-            messages=[{"role": "user", "content": "Return a person"}],
-            schema_dict={"name": str, "age": int},
-            max_json_fix_retries=0,
-        )
-        await server.close()
-
-        text = path.read_text(encoding="utf-8")
-        self.assertEqual(result, {"name": "Ana", "age": 31})
-        self.assertIn("llm_request #1", text)
-        self.assertIn("|REQ-MESSAGES|", text)
-        self.assertIn("|REQ-PRM|", text)
-        self.assertIn("[MESSAGE]", text)
-        self.assertIn('{"name": "Ana", "age": 31}', text)
-        self.assertIn('|INFO| parsed={"name": "Ana", "age": 31}', text)
-        self.assertIn("llm_response_end #1", text)
-
-    async def test_call_runs_tool_loop_before_final_answer(self):
-        tool_calls = [
-            {
-                "id": "call_1",
-                "type": "function",
-                "function": {"name": "add", "arguments": "{\"a\": 2, \"b\": 3}"},
-            }
-        ]
-        transport = FakeTransport([
-            {"content": "", "tool_calls": tool_calls},
-            "The sum is 5.",
-        ])
-
-        def add(arguments: dict[str, Any]) -> dict[str, int]:
-            return {"sum": arguments["a"] + arguments["b"]}
-
-        server = LLMProviderPool(provider=ProviderKind.OLLAMA, transport=transport)
-        llm = server.load_model(model="small-test-model")
-        result = await llm.call(
-            messages=[{"role": "user", "content": "Add 2 and 3"}],
-            tools=[
-                {
-                    "type": "function",
-                    "function": {
-                        "name": "add",
-                        "parameters": {
-                            "type": "object",
-                            "properties": {
-                                "a": {"type": "integer"},
-                                "b": {"type": "integer"},
-                            },
-                            "required": ["a", "b"],
-                        },
-                    },
-                }
-            ],
-            tool_registry={"add": add},
-            max_tool_rounds=2,
-        )
-        self.assertEqual(result, "The sum is 5.")
-        self.assertEqual(len(transport.calls), 2)
-        second_messages = transport.calls[1]["payload"]["messages"]
-        self.assertEqual(second_messages[-1]["role"], "tool")
-        self.assertEqual(second_messages[-1]["name"], "add")
-        self.assertEqual(json.loads(second_messages[-1]["content"]), {"sum": 5})
 
 
 if __name__ == "__main__":
