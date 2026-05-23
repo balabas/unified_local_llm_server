@@ -13,7 +13,7 @@ from unified_local_llm_server.pipelines.loop_guard import LoopGuardPipeline
 from unified_local_llm_server.pipelines.tool import ToolPipeline
 from unified_local_llm_server.provider_registry import ProviderRegistry
 from unified_local_llm_server.providers import ProviderKind, resolve_provider_config
-from unified_local_llm_server.server import LocalLLM, LLMProviderPool
+from unified_local_llm_server.pool import LocalLLM, LLMProviderPool
 
 
 class FakeTransport:

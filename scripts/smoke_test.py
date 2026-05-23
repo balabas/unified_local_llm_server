@@ -6,7 +6,7 @@ from dataclasses import dataclass
 
 from unified_local_llm_server.provider_registry import ProviderRegistry, provider_entry_to_server_kwargs
 from unified_local_llm_server.providers import ProviderKind
-from unified_local_llm_server.server import LLMProviderPool
+from unified_local_llm_server.pool import LLMProviderPool
 
 
 @dataclass(slots=True)

@@ -1,28 +1,62 @@
+"""Repetition-loop detection pipeline.
+
+Responsibility
+--------------
+Detects when a model has entered a runaway repetition loop and signals the
+caller to retry with a corrective prompt.  Five complementary detectors
+cover the most common failure modes observed in practice:
+
+- **sequence_loop** — a fixed n-gram repeats many times in the tail.
+- **last_token_split_loop** — the model repeats the same suffix at the end
+  of every "token" (common with greedy decoding at long context).
+- **incrementing_sequence_loop** — structurally identical lines where only
+  numbers change (e.g. ``"item 1", "item 2", …`` repeating the pattern).
+- **numeric_list** — a dense run of numbers with separators (degenerate
+  enumeration or counting loops).
+- **numbered_block_cycle** — a numbered block repeats but with different
+  numbers each time; detected by stripping digits before n-gram matching.
+
+All detectors are tunable via environment variables so thresholds can be
+adjusted without code changes.
+
+Layer position
+--------------
+Pipeline layer.  Instantiated once by ``LLMProviderPool.__init__`` and
+called from ``pool._call()`` after each generation round.
+No imports from the rest of this package.
+"""
 from __future__ import annotations
 
 import os
 import re
 
-_LOOP_WINDOW = int(os.environ.get("LOOP_WINDOW", "220"))
-_LOOP_LOOKBACK = int(os.environ.get("LOOP_LOOKBACK", "4000"))
-_LOOP_MIN_HITS = int(os.environ.get("LOOP_MIN_HITS", "4"))
-_LOOP_MIN_SUM_LEN = int(os.environ.get("LOOP_MIN_SUM_LEN", "700"))
+# Tunable thresholds — override via environment variables
+_LOOP_WINDOW       = int(os.environ.get("LOOP_WINDOW",            "220"))
+_LOOP_LOOKBACK     = int(os.environ.get("LOOP_LOOKBACK",          "4000"))
+_LOOP_MIN_HITS     = int(os.environ.get("LOOP_MIN_HITS",          "4"))
+_LOOP_MIN_SUM_LEN  = int(os.environ.get("LOOP_MIN_SUM_LEN",       "700"))
 _INCR_SEQ_MIN_LINES = int(os.environ.get("LOOP_INCR_SEQ_MIN_LINES", "15"))
 
 _NUMERIC_LIST_RE = re.compile(r"(?:\d+\s*[,\s]\s*){50,}")
-_NUMBER_RE = re.compile(r"\d+")
+_NUMBER_RE       = re.compile(r"\d+")
 
 
 def _is_sequence_looping(text: str, window: int, lookback: int, min_hits: int) -> bool:
+    """Return True if the last ``window`` characters appear ``min_hits`` times
+    in the last ``lookback`` characters with sufficient total coverage.
+
+    The coverage check (``count * len(ngram) >= _LOOP_MIN_SUM_LEN``) prevents
+    false positives on very short repeated phrases like punctuation.
+    """
     try:
         if not text:
             return False
-        window = max(50, int(window))
+        window   = max(50, int(window))
         lookback = max(window * 2, int(lookback))
         min_hits = max(2, int(min_hits))
         if len(text) < window * 2:
             return False
-        tail = text[-lookback:]
+        tail  = text[-lookback:]
         ngram = text[-window:]
         count = tail.count(ngram)
         return count >= min_hits and count * len(ngram) >= _LOOP_MIN_SUM_LEN
@@ -31,6 +65,8 @@ def _is_sequence_looping(text: str, window: int, lookback: int, min_hits: int) -
 
 
 def _is_last_token_split_loop(text: str) -> bool:
+    """Detect when the penultimate token acts as a splitting delimiter that
+    yields identical surrounding segments in the tail of the output."""
     try:
         toks = text.split()
         if not toks or len(toks) < 1000:
@@ -48,6 +84,12 @@ def _is_last_token_split_loop(text: str) -> bool:
 
 
 def _is_incrementing_sequence_loop(text: str, min_run: int = _INCR_SEQ_MIN_LINES) -> bool:
+    """Detect structurally identical lines where only numbers differ.
+
+    Numbers are replaced with ``#`` before comparison so ``"item 1"`` and
+    ``"item 2"`` are treated as the same template.  Checks both newline-split
+    and comma-split formats.
+    """
     try:
         lines = text.splitlines()
         if len(lines) < min_run:
@@ -59,8 +101,8 @@ def _is_incrementing_sequence_loop(text: str, min_run: int = _INCR_SEQ_MIN_LINES
             else:
                 return False
 
-        check_lines = lines[-min_run * 3:] if len(lines) > min_run * 3 else lines
-        run_length = 1
+        check_lines  = lines[-min_run * 3:] if len(lines) > min_run * 3 else lines
+        run_length   = 1
         prev_template = _NUMBER_RE.sub("#", check_lines[0].strip())
 
         for line in check_lines[1:]:
@@ -70,7 +112,7 @@ def _is_incrementing_sequence_loop(text: str, min_run: int = _INCR_SEQ_MIN_LINES
                 if run_length >= min_run:
                     return True
             else:
-                run_length = 1
+                run_length    = 1
                 prev_template = template
         return False
     except Exception:
@@ -78,6 +120,7 @@ def _is_incrementing_sequence_loop(text: str, min_run: int = _INCR_SEQ_MIN_LINES
 
 
 def _is_numeric_list_loop(text: str, min_length: int = 2000) -> bool:
+    """Detect a dense run of 50+ consecutive numbers — a degenerate counting loop."""
     if len(text) < min_length:
         return False
     tail = text[-min_length:]
@@ -85,6 +128,11 @@ def _is_numeric_list_loop(text: str, min_length: int = 2000) -> bool:
 
 
 def _is_numbered_block_cycle(text: str, min_length: int = 1500) -> bool:
+    """Detect a repeating block pattern where only embedded numbers change.
+
+    Strips all digits before running the n-gram detector so blocks like
+    ``"Step 1: do X"`` and ``"Step 2: do X"`` are treated identically.
+    """
     try:
         if len(text) < min_length:
             return False
@@ -95,6 +143,11 @@ def _is_numbered_block_cycle(text: str, min_length: int = 1500) -> bool:
 
 
 def check_loop(text: str) -> str | None:
+    """Run all detectors and return the first matching reason string, or ``None``.
+
+    The check order is roughly from cheapest/most-specific to most expensive:
+    last-token-split first (O(n) split), then general n-gram, then others.
+    """
     if _is_last_token_split_loop(text):
         return "last_token_split"
     if _is_sequence_looping(text, _LOOP_WINDOW, _LOOP_LOOKBACK, _LOOP_MIN_HITS):
@@ -109,10 +162,19 @@ def check_loop(text: str) -> str | None:
 
 
 class LoopGuardPipeline:
+    """Stateless wrapper exposing the loop-detection logic to ``pool._call()``."""
+
     def check(self, text: str) -> str | None:
+        """Return a reason string if ``text`` is a loop, else ``None``."""
         return check_loop(text)
 
     def build_retry_messages(self, text: str, reason: str) -> list[dict[str, str]]:
+        """Build corrective messages that instruct the model to stop looping.
+
+        Appended to the conversation so the model sees its bad output on retry.
+        Only the last 2 000 characters of the looping output are included to
+        avoid blowing the context window.
+        """
         return [
             {
                 "role": "system",
@@ -126,4 +188,3 @@ class LoopGuardPipeline:
                 "content": f"Previous looping output:\n{text[-2000:]}",
             },
         ]
-

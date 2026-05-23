@@ -1,4 +1,4 @@
-# unified_local_model_server
+# unified_local_llm_server
 
 Unified async interface for local OpenAI-compatible LLM providers (Ollama, LM Studio, Unsloth, llama.cpp).
 
@@ -23,12 +23,20 @@ pip install -e .
 
 Dependencies: `pydantic>=2.0`, `pyyaml>=6.0`. No OpenAI SDK required.
 
+To enable provider restart support (optional), run the setup script once:
+
+```bash
+sudo bash scripts/setup_service_restart.sh
+```
+
+This is separate from `pip install` — it writes polkit rules and systemd service files to system directories and cannot be done by pip.
+
 ---
 
 ## Quick start
 
 ```python
-from unified_local_model_server import LLMProviderPool
+from unified_local_llm_server import LLMProviderPool
 
 pool = LLMProviderPool("providers.yaml")
 
@@ -425,12 +433,42 @@ result = await model.call(
 
 ---
 
+### Safety pipelines
+
+Every `model.call` runs two automatic guard mechanisms after the model produces a response, before it is returned to the caller.
+
+#### Loop guard
+
+Detects when the model has entered a repetition loop (copy-paste repetition, stuttering, n-gram cycling, ping-pong exchange, or a monotone run of identical tokens). On detection the guard appends a corrective prompt and retries the generation, up to `max_loop_retries` times.
+
+Triggered automatically — no configuration needed. Tune sensitivity with environment variables:
+
+| Variable | Default | Effect |
+|---|---|---|
+| `LOOP_GUARD_DISABLED` | `0` | Set `1` to turn off the guard entirely |
+| `LOOP_GUARD_MIN_LEN` | `60` | Minimum response length before checks run |
+| `LOOP_GUARD_REPEAT_RATIO` | `0.35` | Threshold for copy-paste ratio detector |
+| `LOOP_GUARD_NGRAM_SIZE` | `6` | N-gram size for cycling detector |
+| `LOOP_GUARD_NGRAM_RATIO` | `0.4` | Threshold for n-gram cycling ratio |
+| `LOOP_GUARD_MONO_RUN` | `40` | Minimum identical-token run to flag |
+
+#### JSON fix
+
+When `schema_dict` is given, validates the model's output against the schema. On failure it:
+1. Attempts lenient repairs (strips markdown fences, extracts embedded JSON, fixes truncation).
+2. If repair fails, appends the validation error to the messages and asks the model to correct its output.
+3. Retries up to `max_json_fix_retries` times before raising `ValueError`.
+
+Both guards share the same retry loop, so a response that triggers both will exhaust retries independently.
+
+---
+
 ### Logging
 
 `AsyncLLMLogger` writes a structured stream log of every request/response pair, including thinking blocks, tool execution results, and timing.
 
 ```python
-from unified_local_model_server.model_logger import AsyncLLMLogger
+from unified_local_llm_server.llm_logger import AsyncLLMLogger
 
 logger = AsyncLLMLogger("logs/session.log")
 model    = pool.load_model("ollama", "llama3.2:3b", logger=logger)

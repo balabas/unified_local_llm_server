@@ -1,3 +1,61 @@
+"""Provider pool — model management and inference coordination.
+
+Responsibility
+--------------
+Client-side abstraction over multiple local LLM provider processes.  This
+module never starts or owns a server; it talks to already-running provider
+daemons (Ollama, LM Studio, llama.cpp, Unsloth) via HTTP.
+
+Public surface
+--------------
+- :class:`LocalLLM`         — immutable inference handle for a single model
+- :class:`LLMProviderPool`  — registry-aware pool; creates handles, manages
+                              model loading, provider health, and restarts
+
+Why so much code?
+-----------------
+The bulk of this file is ``_call()`` — the single async method that handles
+every inference path.  It is long because it must bridge four structurally
+different providers behind one interface while running three safety pipelines
+on every response.  The sections in order:
+
+1. **Message preparation** — injects system prompts for ``think`` / ``effort``.
+2. **Server-level param check** — detects changed params (``num_parallel`` etc.)
+   and restarts the provider service if needed before loading any model.
+3. **Model loading** — calls the provider-specific ``_ensure_*_loaded`` method
+   so the right model is in memory with the right configuration.
+4. **Generation loop** — runs until a final text answer is produced:
+
+   a. ``_build_payload`` normalises the request for the target provider.
+   b. ``_stream_chat_sync`` / ``_ollama_preload_sync`` perform the actual HTTP
+      call and return a response object with ``.content``, ``.reasoning``,
+      ``.choices``, and ``.usage``.
+   c. **ToolPipeline** — if the model returned tool calls, dispatches handlers
+      and appends ``assistant`` + ``tool`` messages, then loops back to (a).
+   d. **LoopGuardPipeline** — checks the final text for repetition loops; on
+      detection appends a corrective prompt and retries (up to
+      ``max_loop_retries``).
+   e. **JsonFixPipeline** — when ``schema_dict`` was given, attempts to parse
+      and validate the text as JSON; on failure appends a repair prompt and
+      retries (up to ``max_json_fix_retries``).
+
+Pipeline hierarchy inside the generation loop
+---------------------------------------------
+::
+
+    _call()
+    └── while True:                          ← json-fix / loop-guard retry loop
+        ├── for tool_round in range(...):    ← tool-call round-trip loop
+        │   ├── _build_payload()
+        │   ├── _stream_chat_sync()  or  _ollama_preload_sync() + /api/chat
+        │   └── ToolPipeline         ← normalize → execute → append messages
+        ├── LoopGuardPipeline.check()        ← breaks → retry with correction
+        └── JsonFixPipeline.parse()          ← breaks → retry with repair prompt
+
+The two outer retries (loop guard, JSON fix) share the same ``while True``
+loop and can each independently trigger another generation attempt.  Tool
+rounds are an inner loop that resolves before either outer check runs.
+"""
 from __future__ import annotations
 
 import asyncio
@@ -1284,14 +1342,14 @@ class LLMProviderPool:
         return_usage: bool = False,
         load_timeout: float | None = None,
     ) -> Any:
-        # Prepare messages
+        # ── 1. Message preparation ──────────────────────────────────────────────
         prepared = [dict(m) for m in messages]
         if effort:
             prepared.insert(0, {"role": "system", "content": f"Reasoning effort: {effort}."})
         if not think:
             prepared.insert(0, {"role": "system", "content": "Respond with the final answer only. Do not emit hidden reasoning."})
 
-        # Extract scalar params from options
+        # ── 2. Options normalisation ─────────────────────────────────────────
         opts = dict(options or {})
         if context_length is not None and self.config.name == ProviderKind.OLLAMA:
             opts.setdefault("num_ctx", context_length)
@@ -1306,7 +1364,7 @@ class LLMProviderPool:
         model_name = model or self.model or await self.resolve_call_model(model)
         effective_load_timeout = load_timeout if load_timeout is not None else self.load_timeout
 
-        # Auto-restart if server-level params changed since last call
+        # ── 3. Server-level param check → auto-restart if config changed ────────
         _server_params: dict[str, Any] = {}
         _server_env: dict[str, str] = {}
         if self.config.name == ProviderKind.OLLAMA:
@@ -1335,6 +1393,7 @@ class LLMProviderPool:
                 await asyncio.to_thread(self.restart, env=_server_env)
                 self._active_server_config.update(_server_params)
 
+        # ── 4. Model loading (provider-specific) ─────────────────────────────────
         if self.config.name == ProviderKind.LM_STUDIO and model_name:
             await asyncio.to_thread(
                 self._ensure_lm_studio_loaded, model_name, context_length,
@@ -1359,6 +1418,9 @@ class LLMProviderPool:
                 )
             await asyncio.to_thread(self._ensure_unsloth_loaded, model_name, context_length, load_params=load_params, load_timeout=effective_load_timeout)
 
+        # ── 5. Generation loop ────────────────────────────────────────────────────
+        # Outer while-loop: retried by LoopGuardPipeline and JsonFixPipeline.
+        # Inner for-loop: each iteration is one tool-call round-trip.
         structured_request = None
         if schema_dict is not None:
             structured_request = self._json_fix.build_request(
@@ -1374,6 +1436,7 @@ class LLMProviderPool:
 
         while True:
             text = ""
+            # ── 5a. Tool-call round-trip ─────────────────────────────────────
             for tool_round in range(max_tool_rounds + 1):
                 payload = self._build_payload(
                     model=model_name,
@@ -1481,6 +1544,7 @@ class LLMProviderPool:
                 )
                 attempt_messages.extend(self._tool_pipeline.tool_messages(executions))
 
+            # ── 5b. LoopGuardPipeline ────────────────────────────────────────
             loop_reason = self._loop_guard.check(text)
             if loop_reason is not None:
                 if self.logger is not None:
@@ -1496,6 +1560,7 @@ class LLMProviderPool:
                 attempt_messages = list(attempt_messages) + self._loop_guard.build_retry_messages(text, loop_reason)
                 continue
 
+            # ── 5c. JsonFixPipeline ──────────────────────────────────────────
             if structured_request is not None:
                 try:
                     parsed = self._json_fix.parse(text, structured_request.model_cls)

@@ -17,7 +17,7 @@ providers:
     host: 127.0.0.1
     port: 8899
     api_key: sk-unsloth-ca758f7eb86406391ed6f6395c40f241
-    health_path: /api/health
+    health_path: /health
     models_path: /v1/models
 
   llama_cpp:

@@ -8,7 +8,7 @@ import asyncio
 from pathlib import Path
 
 from unified_local_llm_server.provider_registry import ProviderRegistry
-from unified_local_llm_server.server import LLMProviderPool
+from unified_local_llm_server.pool import LLMProviderPool
 
 ROOT = Path(__file__).parent.parent
 REGISTRY_PATH = ROOT / "providers.example.yaml"
